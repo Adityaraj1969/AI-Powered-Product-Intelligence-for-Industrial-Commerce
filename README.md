@@ -1,12 +1,13 @@
 # ⚡ PartForge — AI-Powered Product Intelligence for Industrial Commerce
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-ai--powered--ecommerce.streamlit.app-FF4B4B.svg?logo=streamlit&logoColor=white)](https://ai-powered-ecommerce.streamlit.app/)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Architecture: Neuro--Symbolic](https://img.shields.io/badge/Architecture-Neuro--Symbolic%20Hybrid-6366f1.svg)]()
 [![Hackathon: UniHack 2026](https://img.shields.io/badge/Hackathon-UniHack%202026-orange.svg)](https://hack2skill.com/event/unilog2026)
-[![Streamlit App](https://img.shields.io/badge/UI-Streamlit%20Workbench-FF4B4B.svg)](https://streamlit.io/)
 [![Schema: 252--Column](https://img.shields.io/badge/Schema-252--Column%20Standard-emerald.svg)]()
 
+> 🌐 **Live Web Platform**: **[https://ai-powered-ecommerce.streamlit.app/](https://ai-powered-ecommerce.streamlit.app/)**  
 > **"PartForge transforms fragmented, cryptic supplier catalog feeds into fully-classified, controlled-vocabulary, 252-column golden records with 100% rule compliance — powered by a high-throughput Neuro-Symbolic Architecture combining deterministic local symbolic engines with multi-agent semantic LLM reasoning."**
 
 ---
@@ -79,12 +80,19 @@ To provide both complete schema compliance and seamless Excel readability, PartF
 
 ---
 
-## 🚀 Quick Start & Local Execution
+## 🚀 Quick Start & Live Platform
 
-### 1. Prerequisites & Installation
+### 🌐 Live Cloud Deployment
+Access the fully deployed, interactive workbench in your browser:  
+👉 **[https://ai-powered-ecommerce.streamlit.app/](https://ai-powered-ecommerce.streamlit.app/)**
+
+---
+
+### 💻 Localhost Execution
+
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/AI-Powered-Product-Intelligence-for-Industrial-Commerce.git
+git clone https://github.com/Adityaraj1969/AI-Powered-Product-Intelligence-for-Industrial-Commerce.git
 cd AI-Powered-Product-Intelligence-for-Industrial-Commerce
 
 # All required packages are standard Python dependencies
