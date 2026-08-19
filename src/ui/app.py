@@ -8,9 +8,18 @@ import sys
 import os
 from pathlib import Path
 
-# Ensure project root is on path
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+# Robust dynamic project root discovery
+def find_project_root() -> Path:
+    p = Path(__file__).resolve().parent
+    for _ in range(4):
+        if (p / "src").exists() and (p / "data").exists():
+            return p
+        p = p.parent
+    return Path.cwd()
+
+PROJECT_ROOT = find_project_root()
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 import pandas as pd
 import streamlit as st
@@ -194,8 +203,14 @@ if "records" not in st.session_state:
 # ── Auto-Load Default Dataset if Empty ────────────────────────────────────────
 
 def auto_load_and_enrich_dataset():
-    if not st.session_state.records and INPUT_CSV.exists():
-        st.session_state.records = ingest_raw_items(INPUT_CSV)
+    if not st.session_state.records:
+        if INPUT_CSV.exists():
+            st.session_state.records = ingest_raw_items(INPUT_CSV)
+        else:
+            # Fallback to local relative data path
+            alt_path = PROJECT_ROOT / "data" / "Unihack_ Sample Dataset - Input.csv"
+            if alt_path.exists():
+                st.session_state.records = ingest_raw_items(alt_path)
 
 if not st.session_state.records:
     auto_load_and_enrich_dataset()
