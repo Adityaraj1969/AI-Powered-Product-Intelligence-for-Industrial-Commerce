@@ -41,7 +41,7 @@ st.set_page_config(
 )
 
 
-# ── Custom Modern SaaS CSS Theme ──────────────────────────────────────────────
+# ── High-Contrast, Universal SaaS Theme ───────────────────────────────────────
 
 st.markdown("""
 <style>
@@ -51,38 +51,37 @@ st.markdown("""
         font-family: 'Plus Jakarta Sans', sans-serif;
     }
     
-    /* Header Gradient & Hero Banner */
+    /* Hero Banner */
     .hero-container {
-        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #311042 100%);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 16px;
-        padding: 24px 32px;
+        padding: 26px 34px;
         margin-bottom: 24px;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
     }
     
     .hero-title {
-        font-size: 2.2rem;
+        font-size: 2.3rem;
         font-weight: 800;
-        background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: #ffffff !important;
         margin-bottom: 6px;
+        letter-spacing: -0.02em;
     }
     
     .hero-subtitle {
-        color: #94a3b8;
+        color: #cbd5e1 !important;
         font-size: 1.05rem;
         font-weight: 500;
     }
 
-    /* Metric Cards */
+    /* Metric Stat Cards */
     .metric-card {
-        background: #1e293b;
+        background: #0f172a;
         border: 1px solid #334155;
         border-radius: 12px;
         padding: 18px 20px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
         transition: transform 0.2s ease, border-color 0.2s ease;
     }
     .metric-card:hover {
@@ -90,67 +89,95 @@ st.markdown("""
         border-color: #6366f1;
     }
     .metric-val {
-        font-size: 1.8rem;
+        font-size: 1.85rem;
         font-weight: 800;
-        color: #f8fafc;
+        color: #ffffff !important;
     }
     .metric-label {
-        font-size: 0.85rem;
-        font-weight: 600;
+        font-size: 0.82rem;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #94a3b8;
+        letter-spacing: 0.06em;
+        color: #94a3b8 !important;
         margin-bottom: 4px;
+    }
+
+    /* High-Contrast Section Headers */
+    .section-banner-raw {
+        background: #1e293b;
+        color: #f8fafc !important;
+        border-left: 4px solid #64748b;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 14px;
+    }
+    
+    .section-banner-enriched {
+        background: linear-gradient(90deg, #1e1b4b 0%, #1e293b 100%);
+        color: #f8fafc !important;
+        border-left: 4px solid #818cf8;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 14px;
     }
 
     /* Status Badges */
     .badge-green {
-        background-color: rgba(16, 185, 129, 0.15);
-        color: #34d399;
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        padding: 4px 10px;
+        background-color: #064e3b;
+        color: #6ee7b7 !important;
+        border: 1px solid #059669;
+        padding: 6px 14px;
         border-radius: 9999px;
-        font-weight: 600;
-        font-size: 0.8rem;
+        font-weight: 700;
+        font-size: 0.85rem;
     }
     .badge-amber {
-        background-color: rgba(245, 158, 11, 0.15);
-        color: #fbbf24;
-        border: 1px solid rgba(245, 158, 11, 0.3);
-        padding: 4px 10px;
+        background-color: #78350f;
+        color: #fde68a !important;
+        border: 1px solid #d97706;
+        padding: 6px 14px;
         border-radius: 9999px;
-        font-weight: 600;
-        font-size: 0.8rem;
+        font-weight: 700;
+        font-size: 0.85rem;
     }
     .badge-red {
-        background-color: rgba(239, 68, 68, 0.15);
-        color: #f87171;
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        padding: 4px 10px;
+        background-color: #7f1d1d;
+        color: #fca5a5 !important;
+        border: 1px solid #dc2626;
+        padding: 6px 14px;
         border-radius: 9999px;
-        font-weight: 600;
-        font-size: 0.8rem;
+        font-weight: 700;
+        font-size: 0.85rem;
     }
 
-    /* Section Cards */
-    .panel-card {
-        background: #1e293b;
+    /* Sidebar Logo Box */
+    .sidebar-brand-box {
+        background: #0f172a;
         border: 1px solid #334155;
         border-radius: 12px;
-        padding: 20px;
+        padding: 16px 12px;
+        text-align: center;
         margin-bottom: 16px;
     }
-    .panel-header {
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: #f1f5f9;
-        margin-bottom: 14px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
+    .sidebar-title {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #ffffff !important;
+        margin: 4px 0 2px 0;
     }
-    
-    /* Code Monospace */
+    .sidebar-sub {
+        color: #818cf8 !important;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    /* Monospace */
     code, pre {
         font-family: 'JetBrains Mono', monospace !important;
     }
@@ -162,8 +189,6 @@ st.markdown("""
 
 if "records" not in st.session_state:
     st.session_state.records = []
-if "selected_sku_idx" not in st.session_state:
-    st.session_state.selected_sku_idx = 0
 
 
 # ── Auto-Load Default Dataset if Empty ────────────────────────────────────────
@@ -180,10 +205,10 @@ if not st.session_state.records:
 
 with st.sidebar:
     st.markdown("""
-    <div style="text-align: center; padding: 10px 0 16px 0;">
-        <span style="font-size: 2.2rem;">⚡</span>
-        <h2 style="margin: 4px 0 0 0; font-weight: 800; color: #f8fafc; font-size: 1.4rem;">PartForge</h2>
-        <span style="color: #6366f1; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">Enterprise Edition</span>
+    <div class="sidebar-brand-box">
+        <span style="font-size: 2rem;">⚡</span>
+        <div class="sidebar-title">PartForge</div>
+        <div class="sidebar-sub">Enterprise Edition</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -259,7 +284,7 @@ with kpi2:
     st.markdown(f"""
     <div class="metric-card">
         <div class="metric-label">🟢 Auto-Passed</div>
-        <div class="metric-val" style="color: #34d399;">{green_count:,}</div>
+        <div class="metric-val" style="color: #34d399 !important;">{green_count:,}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -267,7 +292,7 @@ with kpi3:
     st.markdown(f"""
     <div class="metric-card">
         <div class="metric-label">🟡 Triage Queue</div>
-        <div class="metric-val" style="color: #fbbf24;">{amber_count:,}</div>
+        <div class="metric-val" style="color: #fbbf24 !important;">{amber_count:,}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -275,7 +300,7 @@ with kpi4:
     st.markdown(f"""
     <div class="metric-card">
         <div class="metric-label">🔴 Review Needed</div>
-        <div class="metric-val" style="color: #f87171;">{red_count:,}</div>
+        <div class="metric-val" style="color: #f87171 !important;">{red_count:,}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -283,7 +308,7 @@ with kpi5:
     st.markdown(f"""
     <div class="metric-card">
         <div class="metric-label">⚡ Accuracy SLA</div>
-        <div class="metric-val" style="color: #818cf8;">{pass_rate:.1f}%</div>
+        <div class="metric-val" style="color: #818cf8 !important;">{pass_rate:.1f}%</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -380,14 +405,15 @@ with tab_inspector:
         rec = records[sel_idx]
 
         # Top SKU Badge Bar
+        badge_class = 'badge-green' if rec.confidence_level == ConfidenceLevel.GREEN else 'badge-amber' if rec.confidence_level == ConfidenceLevel.AMBER else 'badge-red'
         st.markdown(f"""
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="background: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
             <div>
-                <span style="font-size: 1.2rem; font-weight: 700; color: #f8fafc;">SKU: {rec.raw_input.mfg_part_num}</span>
-                <span style="margin-left: 12px; color: #94a3b8;">{rec.brand_profile.brand_name} · {rec.brand_profile.manufacturer_name}</span>
+                <span style="font-size: 1.25rem; font-weight: 800; color: #ffffff;">SKU: {rec.raw_input.mfg_part_num}</span>
+                <span style="margin-left: 14px; color: #cbd5e1; font-weight: 600;">{rec.brand_profile.brand_name} · {rec.brand_profile.manufacturer_name}</span>
             </div>
             <div>
-                <span class="badge-{'green' if rec.confidence_level == ConfidenceLevel.GREEN else 'amber' if rec.confidence_level == ConfidenceLevel.AMBER else 'red'}">
+                <span class="{badge_class}">
                     Confidence: {rec.overall_confidence:.0%} ({rec.confidence_level.value})
                 </span>
             </div>
@@ -399,31 +425,31 @@ with tab_inspector:
         # ── LEFT: Raw Supplier Input ──────────────────────────────────────────
         with col_left:
             st.markdown("""
-            <div class="panel-header">📥 Raw Supplier Feed (Unstructured & Cryptic)</div>
+            <div class="section-banner-raw">📥 Raw Supplier Feed (Unstructured & Cryptic)</div>
             """, unsafe_allow_html=True)
             
             st.json({
                 "Mfg_Part_Num": rec.raw_input.mfg_part_num,
                 "Part_Desc": rec.raw_input.part_desc,
-                "E1_Brand": rec.raw_input.e1_brand,
-                "Unilog_Brand": rec.raw_input.unilog_brand,
-                "DIB_Brand": rec.raw_input.dib_brand,
+                "E1_Brand": rec.raw_input.e1_brand or "NULL (Placeholder)",
+                "Unilog_Brand": rec.raw_input.unilog_brand or "NULL (Placeholder)",
+                "DIB_Brand": rec.raw_input.dib_brand or "NULL (Placeholder)",
                 "Part_Manuf": rec.raw_input.part_manuf,
             })
 
-            st.markdown("### 🏢 Resolved Master Entity")
+            st.markdown("#### 🏢 Resolved Master Entity")
             st.markdown(f"**Canonical Brand**: `{rec.brand_profile.brand_name}`")
             st.markdown(f"**Manufacturer**: `{rec.brand_profile.manufacturer_name}`")
             st.markdown(f"**Trademark Retained**: `{'Yes (®/™)' if rec.brand_profile.trademark_retained else 'Standard'}`")
 
-            st.markdown("### 📂 Classification & Codes")
+            st.markdown("#### 📂 Classification & Codes")
             st.markdown(f"**Classpath**: `{rec.taxonomy.classpath}`")
             st.markdown(f"**UNSPSC Code**: `{rec.taxonomy.unspsc_code}`")
 
         # ── RIGHT: Enriched Golden Outputs ────────────────────────────────────
         with col_right:
             st.markdown("""
-            <div class="panel-header">✨ Enriched Multi-Channel Descriptions & LOVs</div>
+            <div class="section-banner-enriched">✨ Enriched Multi-Channel Descriptions & LOVs</div>
             """, unsafe_allow_html=True)
 
             inv_txt = rec.descriptions.invoice_desc
@@ -458,7 +484,7 @@ with tab_inspector:
                 key=f"insp_long_{sel_idx}"
             )
 
-            st.markdown("### 📊 Extracted Technical Attributes (LOVs)")
+            st.markdown("#### 📊 Extracted Technical Attributes (LOVs)")
             if rec.attributes:
                 attr_rows = []
                 for a in rec.attributes:
