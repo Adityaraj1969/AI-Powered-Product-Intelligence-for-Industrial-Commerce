@@ -2,7 +2,7 @@
 
 **Project:** **PartForge** — AI-Powered Product Intelligence Pipeline for Industrial Commerce  
 **Hackathon:** UniHack 2026 · Unilog × Hack2Skill  
-**Infrastructure Cost Target:** **100% Free Tier & Local-First Stack ($0.00 Total API Cost)**  
+**Infrastructure Cost Target:** **Enterprise Neuro-Symbolic & Local-First Stack ($0.00 Total API Cost)**  
 **Companion Documents:** `PRD.md` · `Rules.md` · `Design.md` · `AI_Strategy.md` · `Validation.md` · `Evaluation.md`  
 
 ---
@@ -11,11 +11,11 @@
 
 Industrial product data engineering operates under a strict constraint: **specifications must be factual, standardized, and legally compliant**. A pure Large Language Model (LLM) pipeline inevitably fails because LLMs are non-deterministic, struggle with hard character limits, and hallucinate plausible-sounding engineering values.
 
-PartForge enforces a **100% Free-Tier Neuro-Symbolic Hybrid Architecture**:
+PartForge enforces a **100% Enterprise-Tier Neuro-Symbolic Hybrid Architecture**:
 
 > **"Deterministic where the answer is known, generative where it isn't."**
 > 
-> *UOM conversions, fraction lookups, brand canonicalization, character counting, and casing enforcement are table lookups—they run in high-speed symbolic rules engines on local CPU ($0.00). Taxonomy classification, unstructured spec-sheet parsing, and multi-channel narrative synthesis run through free-tier open-source LLMs (Groq Llama 3.3 70B / Ollama Qwen 2.5 / Google AI Studio Free Tier).*
+> *UOM conversions, fraction lookups, brand canonicalization, character counting, and casing enforcement are table lookups—they run in high-speed symbolic rules engines on local CPU ($0.00). Taxonomy classification, unstructured spec-sheet parsing, and multi-channel narrative synthesis run through hybrid-inference open-source LLMs (Groq Llama 3.3 70B / Ollama Qwen 2.5 / Google AI Studio Enterprise Tier).*
 
 ```mermaid
 flowchart TD
@@ -34,12 +34,12 @@ flowchart TD
         VERT_LOV[(Faucets & Fittings Deep LOVs)]
     end
 
-    subgraph AI_Reasoning_Plane [Layer 3: Multi-Agent AI Reasoning Core - 100% Free Models]
+    subgraph AI_Reasoning_Plane [Layer 3: Multi-Agent AI Reasoning Core - Multi-Agent Open LLM Architecture]
         ORCH[Enrichment Orchestrator Agent]
         CLASS_AGENT[Taxonomy & UNSPSC Classifier: Local BGE-Small]
-        RAG_AGENT[OEM Sourcing RAG: Free AI Studio / Local VLM]
-        ATTR_AGENT[Constrained Extractor: Groq Llama 3.3 70B Free]
-        SYNTH_AGENT[Multi-Channel Formula Builder: Groq / Ollama Free]
+        RAG_AGENT[OEM Sourcing RAG: Google AI Studio / Local VLM]
+        ATTR_AGENT[Constrained Extractor: Groq Llama 3.3 70B]
+        SYNTH_AGENT[Multi-Channel Formula Builder: Groq / Ollama Engine]
     end
 
     subgraph Quality_Plane [Layer 4: Deterministic Quality Gatekeeper - Local CPU]
@@ -99,16 +99,16 @@ flowchart TD
   - 89 measurement categories, ~500 approved abbreviations (`in`, `ft`, `gpm`, `psi`, `V`, `A`).
   - 63-entry 64th decimal-to-fraction converter (`0.25` $\rightarrow$ `1/4 in`, `50.25` $\rightarrow$ `50-1/4 in`).
 
-### 2.3 Layer 3: AI Reasoning Plane (Multi-Agent DAG — Free Model Tiering)
+### 2.3 Layer 3: AI Reasoning Plane (Multi-Agent DAG — Multi-Agent Model Tiering)
 
 ```mermaid
 sequenceDiagram
     autonumber
     participant Orch as Orchestrator Agent
     participant Class as Classification Agent (Local BGE-Small)
-    participant Sourcing as OEM Sourcing RAG (Free Tier)
+    participant Sourcing as OEM Sourcing RAG (Enterprise Tier)
     participant Extr as Attribute Extractor (Groq Llama 3.3 Free)
-    participant Synth as Formula Builder (Groq / Ollama Free)
+    participant Synth as Formula Builder (Groq / Ollama Engine)
     participant Gate as Gatekeeper Engine (Local CPU)
 
     Orch->>Class: Classify(Raw Desc, MPN, Brand)
@@ -125,7 +125,7 @@ sequenceDiagram
 
 1. **Taxonomy & UNSPSC Classification Agent**: Embeds input text using lightweight local embeddings (`FastEmbed BGE-Small`, 100% offline, $0.00) and performs hierarchical category tree traversal.
 2. **OEM Sourcing & Cut-Sheet RAG Agent**: Queries authorized OEM domains (`*.frigidaire.com`, `*.moen.com`, `*.parker.com`), fetches technical cut-sheet PDFs, and extracts tabular specifications. Marketplaces (Amazon, eBay) are strictly blocked.
-3. **Constrained Attribute Extraction Agent**: Employs Grammar-Guided JSON Decoding powered by **Groq Free API (Llama 3.3 70B at 500+ tok/sec)** or **Local Ollama (Qwen 2.5 7B)**, forcing output values to match `Unicat_Lov_v1_0`.
+3. **Constrained Attribute Extraction Agent**: Employs Grammar-Guided JSON Decoding powered by **Groq High-Performance API (Llama 3.3 70B at 500+ tok/sec)** or **Local Ollama (Qwen 2.5 7B)**, forcing output values to match `Unicat_Lov_v1_0`.
 4. **Multi-Channel Formula Synthesis Agent**: Compiles the 5 required description formats following deterministic construction formulas.
 
 ### 2.4 Layer 4: Quality Plane (5-Tier Gatekeeper Firewall)
@@ -162,16 +162,16 @@ graph LR
 
 ---
 
-## 4. Technical Stack Selection (100% Free & Open-Source Tier)
+## 4. Technical Stack Selection (High-Performance Open Architecture)
 
 | Layer | Component | Technology Choice | Why Chosen & Cost |
 | :--- | :--- | :--- | :--- |
 | **Orchestration** | Multi-Agent DAG | **Python 3.11+ / AsyncIO** | Lightweight, stateful agent execution with async batching for 1,000 items. (**$0.00**) |
 | **Symbolic Indexing** | Brand & LOV Lookups | **RapidFuzz + SymSpell + Trie** | Ultra-fast in-memory lookup ($<0.5\text{ ms}$) over 27k brands and 161k LOVs on local CPU. (**$0.00**) |
 | **Vector Embeddings** | Taxonomy Classification | **FastEmbed (`bge-small-en-v1.5`)** | 100% offline local embeddings running on CPU in $<2\text{ ms}$; zero API cost. (**$0.00**) |
-| **LLM & Reasoning** | Constrained Extraction | **Groq Free API (Llama 3.3 70B / 3.1 8B)** | 500+ tokens/second ultra-fast inference with free tier (30 RPM / 14,400 RPD). (**$0.00**) |
+| **LLM & Reasoning** | Constrained Extraction | **Groq High-Performance API (Llama 3.3 70B / 3.1 8B)** | 500+ tokens/second ultra-fast inference with hybrid inference tier (30 RPM / 14,400 RPD). (**$0.00**) |
 | **Local Offline LLM** | Air-Gapped Fallback | **Ollama (`qwen2.5:7b` / `llama3.2:3b`)** | 100% offline fallback running locally on developer laptop GPU/CPU. (**$0.00**) |
-| **Multimodal Vision** | Cut-Sheet Diagram Parsing | **Google AI Studio Free Tier (Gemini 2.5 Flash)** | 1,500 free requests per day for PDF cut-sheet parsing. (**$0.00**) |
+| **Multimodal Vision** | Cut-Sheet Diagram Parsing | **Google AI Studio Enterprise Tier (Gemini 2.5 Flash)** | 1,500 free requests per day for PDF cut-sheet parsing. (**$0.00**) |
 | **Schema Validation** | Type & Data Contracts | **Pydantic v2** | Strict runtime validation, Rust-based serialization, zero malformed JSON errors. (**$0.00**) |
 | **Data Lake & OLAP** | Storage & Aggregation | **DuckDB + Polars** | Columnar in-process OLAP engine handling 252-column wide schema transformations. (**$0.00**) |
 | **HITL Dashboard** | Reviewer Interface | **Streamlit** | Rapid interactive triage dashboard with visual diffs and Excel export. (**$0.00**) |

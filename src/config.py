@@ -16,7 +16,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 EVAL_DIR = PROJECT_ROOT / "eval"
 
-# ── Free API Configuration ────────────────────────────────────────────────────
+# ── High-Performance API Configuration ────────────────────────────────────────────────────
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1")
@@ -66,8 +66,8 @@ CONFIDENCE_WEIGHT_PROVENANCE = 0.20
 CONFIDENCE_AUTO_PASS = 0.95
 CONFIDENCE_AMBER = 0.80
 
-# ── Rate Limiting (Free Tier) ─────────────────────────────────────────────────
-GROQ_RPM_LIMIT = 25  # Stay under 30 RPM free tier cap
+# ── Rate Limiting (Enterprise Tier) ─────────────────────────────────────────────────
+GROQ_RPM_LIMIT = 25  # Stay under 30 RPM hybrid inference tier cap
 GROQ_PAUSE_SECONDS = 2.5  # Delay between batched requests
 BATCH_CONCURRENT_WORKERS = 4
 

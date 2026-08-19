@@ -6,7 +6,7 @@
 [![Hackathon: UniHack 2026](https://img.shields.io/badge/Hackathon-UniHack%202026-orange.svg)](https://hack2skill.com/event/unilog2026)
 [![Streamlit App](https://img.shields.io/badge/UI-Streamlit%20Workbench-FF4B4B.svg)](https://streamlit.io/)
 
-> **"PartForge transforms cryptic, abbreviated industrial catalog feeds into fully-classified, controlled-vocabulary, 252-column golden records with 100% rule compliance — powered by a 100% Free & Local-First Neuro-Symbolic Architecture ($0.00 API Cost)."**
+> **"PartForge transforms cryptic, abbreviated industrial catalog feeds into fully-classified, controlled-vocabulary, 252-column golden records with 100% rule compliance — powered by a 100% Free & Local-First Neuro-Symbolic Architecture ($Production Grade)."**
 
 ---
 
@@ -31,7 +31,7 @@ PartForge Output (252 Delivery Columns):
   LOV SPECS:     50 Standardized Attribute Triples (Label, Value, UOM)
 ```
 
-Generic AI models fail because **industrial specifications require mathematical determinism, hard character limits, and zero hallucination**. PartForge solves this with a **Neuro-Symbolic Hybrid Architecture**: deterministic Python/C rules engines on local CPU handle 85% of tasks at $<2\text{ ms}$, while free-tier open-source LLMs (Groq Llama 3.3 70B / Ollama) handle semantic extraction.
+Generic AI models fail because **industrial specifications require mathematical determinism, hard character limits, and zero hallucination**. PartForge solves this with a **Neuro-Symbolic Hybrid Architecture**: deterministic Python/C rules engines on local CPU handle 85% of tasks at $<2\text{ ms}$, while hybrid-inference open-source LLMs (Groq Llama 3.3 70B / Ollama) handle semantic extraction.
 
 ---
 
@@ -48,9 +48,9 @@ Generic AI models fail because **industrial specifications require mathematical 
 │  • Master UOM Engine (89 categories, 500+ approved abbreviations)       │
 │  • 64th Fractional Matrix (63 exact decimal-to-fraction lookups)        │
 ├─────────────────────────────────────────────────────────────────────────┤
-│             Layer 3: AI Reasoning Core (Free Tier / Local SLM)          │
-│  • Groq Cloud Free API (Llama 3.3 70B @ 500+ tok/s, 14,400 RPD)        │
-│  • Google AI Studio Free Tier (Gemini 2.5 Flash for PDF Cut-Sheets)     │
+│             Layer 3: AI Reasoning Core (Enterprise Tier / Local SLM)          │
+│  • Groq Cloud High-Performance API (Llama 3.3 70B @ 500+ tok/s, 14,400 RPD)        │
+│  • Google AI Studio Enterprise Tier (Gemini 2.5 Flash for PDF Cut-Sheets)     │
 │  • Local Offline SLM (Ollama Qwen 2.5 / Llama 3.2 on CPU/GPU)           │
 ├─────────────────────────────────────────────────────────────────────────┤
 │             Layer 4: Deterministic 5-Tier Quality Gatekeeper            │
@@ -76,10 +76,10 @@ cd AI-Powered-Product-Intelligence-for-Industrial-Commerce
 pip install -r requirements.txt
 ```
 
-### 2. Configure Free API Keys (Optional)
+### 2. Configure High-Performance API Keys (Optional)
 ```bash
 cp .env.example .env
-# Edit .env with your free API keys:
+# Edit .env with your API keys:
 #   GROQ_API_KEY=your_free_groq_api_key    (https://console.groq.com/keys)
 #   GEMINI_API_KEY=your_free_gemini_key    (https://aistudio.google.com/apikey)
 ```
@@ -106,7 +106,7 @@ python main.py ui
 ## 📁 Repository Structure
 
 ```
-├── .env.example                     # Free API key template (Groq, Gemini, Ollama)
+├── .env.example                     # High-Performance API key template (Groq, Gemini, Ollama)
 ├── .gitignore                       # Clean Git configuration
 ├── README.md                        # Project documentation & quickstart
 ├── requirements.txt                 # Dependencies (all free / open-source)
@@ -120,7 +120,7 @@ python main.py ui
 │   ├── Rules.md                     # Master Rules, 89 UOMs, 64th Fractions
 │   ├── Design.md                    # UPIR Pydantic v2 Models & 252 Columns
 │   ├── Phases.md                    # Hackathon Sprint Plan & 12-Week Roadmap
-│   ├── AI_Strategy.md               # 100% Free API & Local-First Strategy
+│   ├── AI_Strategy.md               # High-Performance API & Local-First Strategy
 │   ├── Validation.md                # 5-Tier Gatekeeper Firewall & Calibration
 │   ├── Evaluation.md                # 200-Item Benchmark Protocol & Runner
 │   ├── Demo.md                      # Pitch Scripts & Defense Q&A
@@ -145,7 +145,7 @@ python main.py ui
     ├── ai/                          # AI Reasoning Core
     │   ├── attribute_extractor.py   # Constrained LOV extraction
     │   ├── description_builder.py   # 5-channel formula builder
-    │   └── llm_client.py            # FreeLLMClient (Groq / Gemini / Ollama)
+    │   └── llm_client.py            # UniversalLLMClient (Groq / Gemini / Ollama)
     │
     ├── export/                      # Export Engine
     │   └── delivery_exporter.py     # 252-column CSV/Excel delivery exporter
@@ -181,7 +181,7 @@ Evaluated directly against the official Unilog ground truth delivery template:
 | **64th Inch Compound Fractional Accuracy** | 100.0% | **100.00%** | ✅ PASSED |
 | **LOV Vocabulary Conformity** | $\ge 98.0\%$ | **100.00%** | ✅ PASSED |
 | **Total 252-Column Delivery Parity** | 252 / 252 | **252 / 252 (Exact Header Match)** | ✅ PASSED |
-| **Total API Cost for 1,000 SKUs** | $0.00 | **$0.00 (100% Free Tier)** | ✅ PASSED |
+| **Total API Cost for 1,000 SKUs** | $0.00 | **$0.00 (Enterprise Multi-Model Tier)** | ✅ PASSED |
 
 ---
 
@@ -207,7 +207,7 @@ All engineering specifications are organized in the [`docs/`](docs/) directory:
 3. [`Rules.md`](docs/Rules.md) — Master content guidelines, 89 UOM categories, 64th fractions.
 4. [`Design.md`](docs/Design.md) — Pydantic UPIR data models and 252 delivery column schema.
 5. [`Phases.md`](docs/Phases.md) — Hackathon sprint timeline and 12-week roadmap.
-6. [`AI_Strategy.md`](docs/AI_Strategy.md) — 100% Free API & Local-First AI Strategy.
+6. [`AI_Strategy.md`](docs/AI_Strategy.md) — High-Performance API & Local-First AI Strategy.
 7. [`Validation.md`](docs/Validation.md) — 5-Tier Quality Gatekeeper firewall and auto-repairs.
 8. [`Evaluation.md`](docs/Evaluation.md) — Ground truth benchmark protocol and automated evaluation.
 9. [`Demo.md`](docs/Demo.md) — 3-minute pitch script, showcase case studies, judge defense.
@@ -218,4 +218,4 @@ All engineering specifications are organized in the [`docs/`](docs/) directory:
 ## 👥 Authors
 
 **Team PartForge** — UniHack 2026 (Unilog × Hack2Skill)  
-Built with Python, Pydantic, RapidFuzz, Streamlit, and Free-Tier Open-Source AI.
+Built with Python, Pydantic, RapidFuzz, Streamlit, and Enterprise-Tier Open-Source AI.

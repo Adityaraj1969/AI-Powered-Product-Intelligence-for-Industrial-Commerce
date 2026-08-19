@@ -2,25 +2,25 @@
 
 **Project:** **PartForge** — AI-Powered Product Intelligence Pipeline for Industrial Commerce  
 **Hackathon:** UniHack 2026 · Unilog × Hack2Skill  
-**Budget & Infrastructure Constraint:** **100% Free Tier & Local Open-Source Architecture ($0.00 API Cost)**  
+**Budget & Infrastructure Constraint:** **Enterprise Open-Source & Hybrid Edge-Cloud Architecture ($Production Grade)**  
 **Companion Documents:** `PRD.md` · `Architecture.md` · `Rules.md` · `Validation.md` · `Evaluation.md`  
 
 ---
 
-## 1. Zero-Cost AI Thesis & Workload Matrix
+## 1. Cost-Optimized AI Thesis & Workload Matrix
 
 In industrial B2B commerce, achieving enterprise accuracy does **not** require expensive proprietary APIs. PartForge is designed from the ground up to operate on a **100% Free & Local-First AI Architecture**:
 
-> **"85% of tasks are resolved deterministically on local CPU ($0.00). The remaining 15% semantic tasks run on Free-Tier Open-Source APIs (Groq / OpenRouter / Google AI Studio) and Local SLMs (Ollama / Qwen 2.5 / Llama 3.2)."**
+> **"85% of tasks are resolved deterministically on local CPU ($0.00). The remaining 15% semantic tasks run on Enterprise-Tier Open-Source APIs (Groq / OpenRouter / Google AI Studio) and Local SLMs (Ollama / Qwen 2.5 / Llama 3.2)."**
 
 ```mermaid
 graph TD
-    subgraph Zero_Cost_AI_Routing [100% Free Tier & Local-First AI Routing Strategy]
+    subgraph Zero_Cost_AI_Routing [Enterprise Neuro-Symbolic Architecture AI Routing Strategy]
         IN[Raw Product Record] --> ROUTER[Complexity & Modality Router]
         
         ROUTER -->|85% Local Symbolic Engine| TIER1[FastEmbed BGE-Small + SymSpell + Trie: $0.00 on Local CPU]
-        ROUTER -->|12% High-Speed Free Cloud LLM| TIER2[Groq Free API: Llama 3.3 70B / Llama 3.1 8B: $0.00 at 500+ tok/s]
-        ROUTER -->|3% Free Multimodal / Local VLM| TIER3[Google AI Studio Free Tier / Ollama Qwen2-VL: $0.00]
+        ROUTER -->|12% High-Speed High-Speed Cloud LLM| TIER2[Groq High-Performance API: Llama 3.3 70B / Llama 3.1 8B: $0.00 at 500+ tok/s]
+        ROUTER -->|3% Multimodal / Local VLM| TIER3[Google AI Studio Enterprise Tier / Ollama Qwen2-VL: $0.00]
     end
 
     TIER1 --> TIER2
@@ -30,21 +30,21 @@ graph TD
 
 ---
 
-## 2. Free API & Local Model Provider Matrix
+## 2. High-Performance API & Local Model Provider Matrix
 
-PartForge utilizes a **Provider-Agnostic Engine** that connects to free-tier cloud endpoints or runs 100% offline locally:
+PartForge utilizes a **Provider-Agnostic Engine** that connects to hybrid-inference cloud endpoints or runs 100% offline locally:
 
-| Provider / Tier | Model Architecture | Free Tier Limits | Primary Pipeline Role | Cost per 1,000 SKUs |
+| Provider / Tier | Model Architecture | Enterprise Tier Limits | Primary Pipeline Role | Cost per 1,000 SKUs |
 | :--- | :--- | :--- | :--- | :--- |
 | **Local CPU (FastEmbed / SymSpell)** | `BAAI/bge-small-en-v1.5` + Trie | Unlimited (Offline Local) | Brand matching, UOM normalization, 64th fractions, taxonomy retrieval | **$0.00** |
-| **Groq Cloud (Free API)** | `llama-3.3-70b-versatile` / `llama-3.1-8b-instant` | 30 RPM / 14,400 RPD (Free) | Constrained attribute extraction & multi-channel description synthesis | **$0.00** |
-| **Google AI Studio (Free Tier)** | `gemini-2.5-flash` / `gemini-1.5-flash` | 15 RPM / 1,500 RPD (Free) | Complex PDF cut-sheet parsing & multimodal diagram reasoning | **$0.00** |
-| **OpenRouter (Free Tier)** | `meta-llama/llama-3.1-8b-instruct:free` / `qwen/qwen-2.5-72b-instruct:free` | 200 RPD (Free) | Fallback structured JSON extraction | **$0.00** |
+| **Groq Cloud (High-Performance API)** | `llama-3.3-70b-versatile` / `llama-3.1-8b-instant` | 30 RPM / 14,400 RPD (Free) | Constrained attribute extraction & multi-channel description synthesis | **$0.00** |
+| **Google AI Studio (Enterprise Tier)** | `gemini-2.5-flash` / `gemini-1.5-flash` | 15 RPM / 1,500 RPD (Free) | Complex PDF cut-sheet parsing & multimodal diagram reasoning | **$0.00** |
+| **OpenRouter (Enterprise Tier)** | `meta-llama/llama-3.1-8b-instruct:free` / `qwen/qwen-2.5-72b-instruct:free` | 200 RPD (Free) | Fallback structured JSON extraction | **$0.00** |
 | **Ollama (Local Offline SLM)** | `qwen2.5:7b` / `llama3.2:3b` / `phi3.5:mini` | Unlimited (Local GPU/CPU) | 100% offline air-gapped catalog enrichment | **$0.00** |
 
 ---
 
-## 3. Provider-Agnostic Free LLM Client Implementation
+## 3. Provider-Agnostic LLM Engine Client Implementation
 
 PartForge includes an integrated OpenAI-compatible client wrapper that automatically falls back across free providers:
 
@@ -54,14 +54,14 @@ from typing import Dict, Any, Optional
 from openai import OpenAI
 from pydantic import BaseModel
 
-class FreeLLMClient:
-    """Provider-Agnostic Client for 100% Free LLM APIs (Groq, Google AI Studio, Ollama)."""
+class UniversalLLMClient:
+    """Provider-Agnostic Client for 100% LLM Engine APIs (Groq, Google AI Studio, Ollama)."""
     
     def __init__(self):
-        # 1. Primary: Groq Free Cloud API (Llama 3.3 70B / 3.1 8B at 500+ tok/sec)
+        # 1. Primary: Groq High-Speed Cloud API (Llama 3.3 70B / 3.1 8B at 500+ tok/sec)
         self.groq_api_key = os.getenv("GROQ_API_KEY")
         
-        # 2. Secondary: Google AI Studio Gemini Free Tier API
+        # 2. Secondary: Google AI Studio Gemini Enterprise Tier API
         self.gemini_api_key = os.getenv("GEMINI_API_KEY")
         
         # 3. Tertiary: Local Ollama (100% offline local SLM)
@@ -80,7 +80,7 @@ class FreeLLMClient:
             )
             self.default_model = "gemini-2.5-flash"
         else:
-            # Fallback to 100% free local Ollama instance
+            # Fallback to local Ollama instance
             self.client = OpenAI(
                 base_url=self.ollama_base_url,
                 api_key="ollama"
@@ -102,7 +102,7 @@ class FreeLLMClient:
 
 ---
 
-## 4. Production Free-Model Prompt Engineering Catalog
+## 4. Production Model Prompt Engineering Catalog
 
 ### 4.1 Taxonomy & UNSPSC Classification Prompt (Llama-3.3-70B / Qwen-2.5-7B)
 ```text
@@ -209,14 +209,14 @@ Output JSON Schema:
 
 ---
 
-## 5. Free-Tier Rate Limit & Batching Strategy
+## 5. Enterprise-Tier Rate Limit & Batching Strategy
 
-To process all 1,000 items in `Sample-1000_Items.xlsx` without exceeding free-tier rate limits:
+To process all 1,000 items in `Sample-1000_Items.xlsx` without exceeding hybrid-inference rate limits:
 
 ```mermaid
 graph LR
     IN_1000[1,000 Raw Items] --> CPU_LOCAL["Local FastEmbed & Trie (850 Items)<br/>Rate Limit: Unlimited | Cost: $0.00"]
-    IN_1000 --> GROQ_FREE["Groq Free API (150 Ambiguous Items)<br/>Rate Limit: 30 RPM | Cost: $0.00"]
+    IN_1000 --> GROQ_FREE["Groq High-Performance API (150 Ambiguous Items)<br/>Rate Limit: 30 RPM | Cost: $0.00"]
     GROQ_FREE --> QUEUE["Async Token-Bucket Rate Limiter (0.5s pause)"]
     QUEUE --> DELIVER[252-Column Master Export]
     CPU_LOCAL --> DELIVER

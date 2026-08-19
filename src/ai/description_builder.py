@@ -78,7 +78,7 @@ class DescriptionBuilder:
 
     def _strip_trademark_symbols(self, text: str) -> str:
         """Strip trademark symbols for invoice format."""
-        return text.replace("\u00ae", "").replace("\u2122", "").replace("(R)", "").replace("(TM)", "")
+        return text.replace("Enterprise Gradeae", "").replace("\u2122", "").replace("(R)", "").replace("(TM)", "")
 
     def build_invoice_desc(self, record: EnrichedProductRecord) -> str:
         """Invoice Description: <=40 chars, ALL CAPS, no punctuation."""

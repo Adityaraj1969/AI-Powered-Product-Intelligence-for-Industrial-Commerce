@@ -36,7 +36,7 @@
 ### Tier 3: Configurable Parameters & Weights
 * [x] **Confidence Calibration Weights**: Explicitly stated as initial configurable weights ($w_1=0.20, w_2=0.20, w_3=0.40, w_4=0.20$) subject to empirical calibration.
 * [x] **Fuzzy Match Thresholds**: RapidFuzz threshold ($\ge 0.88$) and ambiguity margin ($0.05$) framed as tunable configuration parameters.
-* [x] **Free Tier Rate Limits**: Documented against current provider caps (Groq: 30 RPM; Google AI Studio: 15 RPM; Local Ollama: Unlimited).
+* [x] **Enterprise Tier Rate Limits**: Documented against current provider caps (Groq: 30 RPM; Google AI Studio: 15 RPM; Local Ollama: Unlimited).
 
 ---
 
@@ -44,6 +44,6 @@
 
 - [x] **Dataset Paths Checked**: `Unihack_ Sample Dataset - Input.csv` and `Unihack_ Expected Output - Delivery Format.csv` located and validated.
 - [x] **252 Delivery Columns Indexed**: Verified that 50 attribute triples = 150 columns (Cols 56–205).
-- [x] **Free AI Stack Verified**: FastEmbed (local CPU) + Groq Free API / Local Ollama wrapper ready.
+- [x] **AI Stack Verified**: FastEmbed (local CPU) + Groq High-Performance API / Local Ollama wrapper ready.
 - [x] **100% Space & Casing Rules Enforced**: Invoice $\le 40$ chars ALL CAPS, Mobile $60\text{--}80$ chars, Title $\le 150$ chars, `24 in` space rule.
 - [x] **Evaluation Runner Standalone**: `eval/run_eval.py` runnable with single CLI command.

@@ -2,14 +2,14 @@
 
 **Project:** **PartForge** — AI-Powered Product Intelligence Pipeline for Industrial Commerce  
 **Hackathon:** UniHack 2026 · Unilog × Hack2Skill  
-**Infrastructure & Budget Advantage:** **100% Free Tier & Local-First Stack ($0.00 Total API Cost)**  
+**Infrastructure & Budget Advantage:** **Enterprise Neuro-Symbolic & Local-First Stack ($0.00 Total API Cost)**  
 **Companion Documents:** `PRD.md` · `Architecture.md` · `Rules.md` · `Design.md` · `Evaluation.md`  
 
 ---
 
 ## 1. The One-Sentence Winning Pitch
 
-> **"PartForge turns a six-word, abbreviated catalog row into a fully classified, controlled-vocabulary, 252-column product record — running on a 100% free and local-first architecture ($0.00 API cost) that shows its work on every single field, so nothing is ever invented and nothing is ever silently wrong."**
+> **"PartForge turns a six-word, abbreviated catalog row into a fully classified, controlled-vocabulary, 252-column product record — running on a enterprise neuro-symbolic hybrid architecture ($0.00 API cost) that shows its work on every single field, so nothing is ever invented and nothing is ever silently wrong."**
 
 ---
 
@@ -101,7 +101,7 @@ graph TD
 
 | Hackathon Rubric Dimension | Weight | How PartForge Wins Top Marks | Verifiable Proof in Demo |
 | :--- | :--- | :--- | :--- |
-| **Technical Innovation & Architecture** | 25% | Neuro-symbolic hybrid combining free open-source SLMs + Trie/Graph symbolic linters. | Live architectural walk, Trie speed benchmarks ($<0.5\text{ ms}$). |
+| **Technical Innovation & Architecture** | 25% | Neuro-symbolic hybrid combining open-source SLMs + Trie/Graph symbolic linters. | Live architectural walk, Trie speed benchmarks ($<0.5\text{ ms}$). |
 | **Accuracy & Ground Truth Parity** | 25% | Scored directly against the official 200 delivery dataset across 252 columns. | Automated benchmark runner displaying $>96\%$ accuracy scorecard. |
 | **Domain & Rule Book Compliance** | 20% | Strict enforcement of Unilog Content Guidelines, 89 UOMs, and 64th fractions. | Zero UOM errors, 100% character limit and ALL CAPS compliance. |
 | **Traceability & Explainability** | 15% | Transparent sourcing provenance back to OEM cut-sheets; visual HITL diffs. | Clickable PDF cut-sheet bounding boxes and confidence flags. |
@@ -112,7 +112,7 @@ graph TD
 ## 5. Judge Q&A Defense Strategy
 
 #### Q1: "Why not just pass the entire Unilog Content Guidelines DOCX into a proprietary paid LLM like GPT-4?"
-> **Answer**: *"A pure LLM prompt fails on three critical counts: First, LLMs cannot reliably enforce hard combinatorial constraints across 161,000 LOV values and 252 columns simultaneously—they hallucinate plausible-sounding values. Second, LLMs consistently fail character-count limits (e.g. producing 42 chars for a 40-char invoice limit). Third, proprietary LLMs are prohibitively expensive for distributor catalogs with 500,000 SKUs. Our neuro-symbolic engine uses fast local CPU Tries for 85% of tasks and free open-source models (Groq/Ollama) for the rest, achieving higher accuracy for $0.00."*
+> **Answer**: *"A pure LLM prompt fails on three critical counts: First, LLMs cannot reliably enforce hard combinatorial constraints across 161,000 LOV values and 252 columns simultaneously—they hallucinate plausible-sounding values. Second, LLMs consistently fail character-count limits (e.g. producing 42 chars for a 40-char invoice limit). Third, proprietary LLMs are prohibitively expensive for distributor catalogs with 500,000 SKUs. Our neuro-symbolic engine uses fast local CPU Tries for 85% of tasks and open-source models (Groq/Ollama) for the rest, achieving higher accuracy for $0.00."*
 
 #### Q2: "How do you prevent the AI from scraping inaccurate data from unverified marketplaces?"
 > **Answer**: *"We enforce a strict Sourcing Hierarchy at the network layer. Our retrieval engine utilizes a strict OEM domain whitelist (`*.frigidaire.com`, `*.moen.com`, `*.parker.com`) and explicitly blacklists consumer marketplaces (Amazon, eBay) and unverified aggregators. If an OEM cut-sheet is unavailable, the system flags the attribute as `fallback_local` for human review rather than scraping untrusted sources."*
@@ -120,5 +120,5 @@ graph TD
 #### Q3: "How does the system handle anomalies or missing values in the ground truth data?"
 > **Answer**: *"We deliberately designed an anomaly auditor. In the 200 ground truth items, our engine detected 4 rows with blank UNSPSC codes and 18 rows with missing country-of-origin metadata. Instead of blindly fabricating data, our engine highlights these discrepancies in the HITL workbench with confidence flags, ensuring full transparency for catalog engineers."*
 
-#### Q4: "How does PartForge scale to a catalog with 500,000 SKUs on a zero-dollar budget?"
-> **Answer**: *"Because 85%+ of normalization runs in local memory via Trie indexes and lookup tables at $<2\text{ ms}$ per item on CPU, our architecture avoids expensive external calls. Using async batch workers and free Groq / local Ollama endpoints, 500,000 SKUs can be processed on commodity hardware for $0.00 total API cost."*
+#### Q4: "How does PartForge scale to a catalog with 500,000 SKUs on a high-efficiency budget?"
+> **Answer**: *"Because 85%+ of normalization runs in local memory via Trie indexes and lookup tables at $<2\text{ ms}$ per item on CPU, our architecture avoids expensive external calls. Using async batch workers and Groq / local Ollama endpoints, 500,000 SKUs can be processed on commodity hardware for $0.00 total API cost."*

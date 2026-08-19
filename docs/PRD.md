@@ -3,7 +3,7 @@
 **Project:** **PartForge** — AI-Powered Product Intelligence Pipeline for Industrial Commerce  
 **Hackathon:** UniHack 2026 · Unilog × Hack2Skill  
 **Track:** AI-Powered Product Intelligence for Industrial Commerce  
-**Infrastructure Target:** **100% Free Tier & Local Open-Source Architecture ($0.00 API Cost)**  
+**Infrastructure Target:** **Enterprise Open-Source & Hybrid Edge-Cloud Architecture ($Production Grade)**  
 **Document Owner:** Team PartForge  
 **Status:** Production-Ready Hackathon Specification v2.1  
 
@@ -22,7 +22,7 @@ Part_Manuf:   Appliance Dealers Cooperative (APPDE)
 
 Unilog is tasked with transforming this unstructured raw feed into a structured, commerce-ready product intelligence record spanning **252 delivery columns** with exact classification, verified attributes, standardized units, and **five separately-formatted channel descriptions** (POS Invoice $\le 40$ chars ALL CAPS, Mobile card $60\text{--}80$ chars, SEO Title $\le 150$ chars, Long PDP Description, and Feature Bullets).
 
-**PartForge** is an enterprise-grade, constraint-governed **Neuro-Symbolic Product Intelligence Engine** built entirely on a **100% Free Tier and Local Open-Source Architecture ($0.00 compute spend)**. It takes sparse, noisy supplier rows and produces a complete **Unified Product Intelligence Record (UPIR)**. Every extracted attribute, brand name, and unit of measure is strictly validated against controlled vocabularies (`UniCat_Manufacturer_and_Brand_List` with 27,000+ rows, `Unicat_Lov_v1_0` with 161,000+ rows, `Master UOM Standards` with 89 categories) or flagged for human review with traceable evidence—**guaranteeing 0.00% hallucination on technical specifications**.
+**PartForge** is an enterprise-grade, constraint-governed **Neuro-Symbolic Product Intelligence Engine** built entirely on a **Enterprise Multi-Model Tier and Local Open-Source Architecture ($0.00 compute spend)**. It takes sparse, noisy supplier rows and produces a complete **Unified Product Intelligence Record (UPIR)**. Every extracted attribute, brand name, and unit of measure is strictly validated against controlled vocabularies (`UniCat_Manufacturer_and_Brand_List` with 27,000+ rows, `Unicat_Lov_v1_0` with 161,000+ rows, `Master UOM Standards` with 89 categories) or flagged for human review with traceable evidence—**guaranteeing 0.00% hallucination on technical specifications**.
 
 PartForge delivers **deep vertical specialization** for two end-to-end specified benchmark categories (**Kitchen & Bath Sink Faucets** and **Pipe/Tube/Hose Fittings**) while running a robust, high-throughput pipeline across the full **1,000-item working dataset** (`Sample-1000_Items.xlsx`), benchmarked directly against Unilog’s **200-item ground truth delivery dataset** (`Unilog-Sample_200_Items-Input-vs-Output.xlsx`).
 
@@ -39,13 +39,13 @@ flowchart LR
         R4["Decimal Dims: '50.25 in'"]
     end
 
-    subgraph PartForge_Engine [PartForge Zero-Cost Engine]
+    subgraph PartForge_Engine [PartForge Cost-Optimized Engine]
         direction TB
         E1[Placeholder Cleaner & Tokenizer - Local CPU]
         E2[Brand & Taxonomy Trie Resolvers - Local CPU]
-        E3[OEM Spec Cut-Sheet RAG - Free AI Studio / Local VLM]
+        E3[OEM Spec Cut-Sheet RAG - Google AI Studio / Local VLM]
         E4[Constrained LOV Extractor - Groq Llama 3.3 Free]
-        E5[Multi-Channel Formula Builder - Groq / Ollama Free]
+        E5[Multi-Channel Formula Builder - Groq / Ollama Engine]
         E6[5-Tier Gatekeeper Firewall - Local CPU]
     end
 
@@ -77,7 +77,7 @@ The output is **strictly constrained, not creative**:
 ### 2.3 Why PartForge Wins on a $0 Budget
 PartForge enforces a **Neuro-Symbolic Architecture**:
 - 85%+ of tasks (brand matching, UOM standardization, fraction conversion, character counting) run on ultra-fast symbolic Trie and table engines on local CPU ($<2\text{ ms}$, **$0.00 cost**).
-- Ambiguous semantic tasks run on **Groq Free Cloud API (Llama 3.3 70B)**, **Google AI Studio Free Tier**, or **Local Ollama SLMs (Qwen 2.5 7B / Llama 3.2 3B)**.
+- Ambiguous semantic tasks run on **Groq High-Speed Cloud API (Llama 3.3 70B)**, **Google AI Studio Enterprise Tier**, or **Local Ollama SLMs (Qwen 2.5 7B / Llama 3.2 3B)**.
 - A **5-Tier Quality Gatekeeper** validates 100% of candidate outputs before export.
 
 ---
@@ -110,11 +110,11 @@ quadrantChart
 | **G2** | **Deep Vertical Mastery** | Deliver complete, end-to-end LOV mapping and description generation for **Faucets** (`FAUCETS_LOV.xlsx`) and **Fittings** (`Fittings_LOV.xlsx`). |
 | **G3** | **Zero Hallucination Guarantee** | 100% of extracted attributes map to `Unicat_Lov_v1_0` or authorized OEM cut-sheet evidence; unverified fields are marked `NULL` + review flag. |
 | **G4** | **100% Normalization Determinism** | 100% compliance with Master UOM standards (approved abbreviations + space rule) and 64th fractional conversions (`Decimal_Fraction.xlsx`). |
-| **G5** | **Batch Scale Execution at $0 Cost** | Process all 1,000 items in `Sample-1000_Items.xlsx` through taxonomy classification, brand resolution, and multi-channel description generation using Free-Tier/Local AI. |
+| **G5** | **Batch Scale Execution at $0 Cost** | Process all 1,000 items in `Sample-1000_Items.xlsx` through taxonomy classification, brand resolution, and multi-channel description generation using Enterprise-Tier/Local AI. |
 | **G6** | **Explainable HITL Workbench** | Provide an interactive Streamlit UI with confidence scoring, visual diffing, and 1-click exception triage. |
 
 ### 3.2 Non-Goals (Explicitly Out of Scope)
-- Paid commercial LLM subscriptions (OpenAI GPT-4, Claude Opus paid APIs) — 100% free open-source / free-tier stack is used.
+- Paid commercial LLM subscriptions (OpenAI GPT-4, Claude Opus paid APIs) — enterprise open-source hybrid stack is used.
 - Full-scale automated image pixel editing (background removal) — digital asset filenames and URLs are mapped, but pixel editing is out of scope.
 - Full attribute-level LOV depth for all 161,000 categories in `Unicat_Lov_v1_0` (focus is deep on Faucets, Fittings, Appliances, and broad on classification).
 - Unrestricted public web scraping; retrieval is strictly bounded to authorized OEM domains and cut-sheets.
@@ -129,7 +129,7 @@ quadrantChart
 | **Content Quality Reviewer** | Verifies accuracy of engineering specs, UOM abbreviations, and trademark symbols. | Hidden hallucinations from generic LLMs; non-compliant units (`24in` vs `24 in`). | 5-Tier Gatekeeper flags errors; UI highlights exact OEM cut-sheet bounding box. |
 | **Digital Commerce Merchandiser** | Optimizes distributor search, faceted navigation, and eCommerce product pages. | Unsearchable products due to missing attributes and non-standard fractions (`0.5` vs `1/2 in`). | Generates 100% faceted LOV attributes, fraction titles, and mobile/invoice descriptions. |
 | **Industrial B2B Contractor** | Procures mission-critical replacement parts under tight project timelines. | Inability to confirm pipe schedule, thread pitch, or voltage from cryptic titles. | Delivers crystal-clear, formula-compliant titles and structured technical attribute tables. |
-| **Hackathon Evaluator / Judge** | Evaluates architectural rigor, ground truth parity, domain compliance, and UI. | Unsubstantiated claims, hardcoded demos, and expensive brittle API wrappers. | Live automated evaluation harness (`eval/run_eval.py`) running on 100% free stack. |
+| **Hackathon Evaluator / Judge** | Evaluates architectural rigor, ground truth parity, domain compliance, and UI. | Unsubstantiated claims, hardcoded demos, and expensive brittle API wrappers. | Live automated evaluation harness (`eval/run_eval.py`) running on enterprise stack. |
 
 ---
 
@@ -162,7 +162,7 @@ graph TD
     D1 & D2 --> PartForge_Pipeline
     R1 & R2 & R3 --> PartForge_Pipeline
     V1 & V2 & V3 & V4 --> PartForge_Pipeline
-    I1 --> PartForge_Pipeline[PartForge Free-Tier Processing Engine]
+    I1 --> PartForge_Pipeline[PartForge Enterprise-Tier Processing Engine]
 ```
 
 ---
@@ -193,7 +193,7 @@ graph TD
 | **Determinism & Accuracy** | **NFR-01** | Technical attributes, UOMs, fractions, and brand entities must be mathematically deterministic. Hallucination rate must be **0.00%**. |
 | **Explainability & Lineage** | **NFR-02** | Every cell in the 252-column matrix must maintain a linked `ProvenanceRecord` (source URL, document title, page, snippet, confidence). |
 | **Throughput & Latency** | **NFR-03** | Sub-2s per item for cached symbolic lookups; batch processing of 1,000 items in $<15$ minutes on standard compute. |
-| **Zero-Cost Operation** | **NFR-04** | **100% Free-Tier & Local-First Stack**: Total API expenditure is strictly **$0.00** by utilizing Groq Free API, Google AI Studio Free Tier, FastEmbed, and Local Ollama SLMs. |
+| **Cost-Optimized Operation** | **NFR-04** | **Enterprise Hybrid Edge-Cloud Stack**: Total API expenditure is strictly **$0.00** by utilizing Groq High-Performance API, Google AI Studio Enterprise Tier, FastEmbed, and Local Ollama SLMs. |
 | **Graceful Degradation** | **NFR-05** | If OEM web retrieval fails or an attribute cannot be verified, the engine emits `NULL` + review flag rather than a speculative guess. |
 | **Auditability** | **NFR-06** | All pipeline execution runs persist an immutable JSONL audit trace recording every intermediate step, rule applied, and confidence score. |
 
@@ -201,7 +201,7 @@ graph TD
 
 ## 8. Success Metrics & Evaluation Targets
 
-| Metric | Measurement Method | Baseline / Naive LLM | PartForge Free Stack | Hackathon SLA |
+| Metric | Measurement Method | Baseline / Naive LLM | PartForge Engine | Hackathon SLA |
 | :--- | :--- | :--- | :--- | :--- |
 | **Canonical Brand Exact Match** | String match against `UniCat` Master List | 71.4% | **98.5%** | $\ge 95.0\%$ |
 | **Taxonomy Classification Accuracy** | 4-level Classpath match on 200 Ground Truth | 68.2% | **96.5%** | $\ge 90.0\%$ |

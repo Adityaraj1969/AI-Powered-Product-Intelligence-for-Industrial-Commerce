@@ -1,5 +1,5 @@
 # PartForge — AI-Powered Product Intelligence Pipeline
-# 100% Free Tier & Local-First Stack ($0.00 API Cost)
+# Enterprise Neuro-Symbolic & Local-First Stack ($Production Grade)
 
 # Core
 pydantic>=2.0,<3.0

@@ -2,7 +2,7 @@
 
 **Project:** **PartForge** — AI-Powered Product Intelligence Pipeline for Industrial Commerce  
 **Hackathon:** UniHack 2026 · Unilog × Hack2Skill  
-**Infrastructure Target:** **100% Free Tier & Local-First Stack ($0.00 Total API Cost)**  
+**Infrastructure Target:** **Enterprise Neuro-Symbolic & Local-First Stack ($0.00 Total API Cost)**  
 **Companion Documents:** `PRD.md` · `Architecture.md` · `Rules.md` · `Validation.md` · `Evaluation.md`  
 
 ---
@@ -231,14 +231,14 @@ graph TD
 
 ---
 
-## 4. Provider-Agnostic Free AI Architecture & REST API
+## 4. Provider-Agnostic Enterprise AI Architecture & REST API
 
 ```mermaid
 sequenceDiagram
     participant App as Client / Streamlit UI
     participant API as FastAPI Gateway
     participant Cache as In-Memory Trie Cache
-    participant LLM as Free LLM (Groq / Ollama / AI Studio)
+    participant LLM as LLM Engine (Groq / Ollama / AI Studio)
     participant DB as DuckDB Master Store
 
     App->>API: POST /api/v1/enrich/single (Raw SKU Row)
@@ -246,7 +246,7 @@ sequenceDiagram
     alt Cache Hit (85% of queries)
         Cache-->>API: Return Standardized Brand, UOM, Fractions
     else Semantic Ambiguity (15% of queries)
-        API->>LLM: Call Free LLM API (Groq Llama 3.3 / Local Ollama)
+        API->>LLM: Call LLM Engine API (Groq Llama 3.3 / Local Ollama)
         LLM-->>API: Constrained JSON Output
     end
     API->>DB: Persist Golden UPIR Record + Provenance
