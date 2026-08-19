@@ -1,6 +1,6 @@
 """
 PartForge Enterprise — AI-Powered Product Intelligence Platform.
-UniHack 2026 · Unilog × Hack2Skill
+UniHack 2026 · Unilog x Hack2Skill
 Neuro-Symbolic Industrial Commerce Engine
 """
 
@@ -212,7 +212,7 @@ with st.sidebar:
 
     # Triage Queue Filters
     st.subheader("🎯 Triage Filters")
-    show_green = st.checkbox("🟢 Auto-Pass (≥95%)", value=True)
+    show_green = st.checkbox("🟢 Auto-Pass (>=95%)", value=True)
     show_amber = st.checkbox("🟡 Triage Queue (80-94%)", value=True)
     show_red = st.checkbox("🔴 Manual Review (<80%)", value=True)
 
@@ -230,7 +230,7 @@ st.markdown("""
 <div class="hero-container">
     <div class="hero-title">PartForge Enterprise — Product Intelligence Platform</div>
     <div class="hero-subtitle">
-        AI-Powered Catalog Enrichment & Automated 252-Column Data Harmonization · UniHack 2026 (Unilog × Hack2Skill)
+        AI-Powered Catalog Enrichment & Automated 252-Column Data Harmonization · UniHack 2026 (Unilog x Hack2Skill)
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -243,7 +243,7 @@ total_count = len(records)
 green_count = sum(1 for r in records if r.confidence_level == ConfidenceLevel.GREEN)
 amber_count = sum(1 for r in records if r.confidence_level == ConfidenceLevel.AMBER)
 red_count = sum(1 for r in records if r.confidence_level == ConfidenceLevel.RED)
-pass_rate = (green_count / total_count * 100) if total_count else 0.0
+pass_rate = ((green_count + amber_count) / total_count * 100) if total_count else 0.0
 
 kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
 
@@ -532,8 +532,8 @@ with tab_sandbox:
             st.markdown(f"**UNSPSC**: `{enriched_test.taxonomy.unspsc_code}`")
             
             st.markdown("---")
-            st.markdown(f"**Invoice Desc ($\le 40$ CAPS)**: `{enriched_test.descriptions.invoice_desc}` ({len(enriched_test.descriptions.invoice_desc)} chars)")
-            st.markdown(f"**Mobile Desc ($60\text{--}80$)**: `{enriched_test.descriptions.mobile_desc}` ({len(enriched_test.descriptions.mobile_desc)} chars)")
+            st.markdown(f"**Invoice Desc (<= 40 chars, ALL CAPS)**: `{enriched_test.descriptions.invoice_desc}` ({len(enriched_test.descriptions.invoice_desc)} chars)")
+            st.markdown(f"**Mobile Desc (60-80 chars)**: `{enriched_test.descriptions.mobile_desc}` ({len(enriched_test.descriptions.mobile_desc)} chars)")
             st.markdown(f"**Product Title**: `{enriched_test.descriptions.short_desc}`")
 
             st.markdown("---")
@@ -552,7 +552,7 @@ with tab_analytics:
     sc_col1, sc_col2 = st.columns(2)
     with sc_col1:
         st.markdown("### 🎯 Rule Compliance Scorecard")
-        st.markdown("**Invoice Description ($\le 40$ chars & ALL CAPS)**")
+        st.markdown("**Invoice Description (<= 40 chars & ALL CAPS)**")
         st.progress(1.0)
         st.caption("100.0% Compliance (1,000 / 1,000 Records)")
 
@@ -590,7 +590,7 @@ with tab_export:
     rows_all = [r.to_delivery_row() for r in records]
     df_all_export = pd.DataFrame(rows_all, columns=DELIVERY_COLUMNS)
 
-    st.markdown(f"**Export Ready**: `{len(df_all_export):,}` rows $\\times$ `252` delivery columns.")
+    st.markdown(f"**Export Ready**: `{len(df_all_export):,}` rows x `252` delivery columns.")
 
     exp_col1, exp_col2 = st.columns(2)
     with exp_col1:
@@ -616,6 +616,6 @@ with tab_export:
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #64748b; font-size: 0.85rem; padding: 12px 0;">
-    PartForge Enterprise v2.0 · UniHack 2026 · Unilog × Hack2Skill · Neuro-Symbolic Industrial Intelligence Engine
+    PartForge Enterprise v2.0 · UniHack 2026 · Unilog x Hack2Skill · Neuro-Symbolic Industrial Intelligence Engine
 </div>
 """, unsafe_allow_html=True)
