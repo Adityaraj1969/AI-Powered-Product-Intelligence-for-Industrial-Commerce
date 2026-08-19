@@ -610,31 +610,55 @@ with tab_analytics:
 # ══════════════════════════════════════════════════════════════════════════════
 
 with tab_export:
-    st.subheader("📥 252-Column Master Export Studio")
-    st.markdown("Generate and download production-ready catalog feeds matching the official Unilog ground truth delivery format.")
+    st.subheader("📥 Export Studio & Delivery Feeds")
+    st.markdown("Choose your preferred export format for downstream commerce platforms or official hackathon evaluation.")
 
-    rows_all = [r.to_delivery_row() for r in records]
-    df_all_export = pd.DataFrame(rows_all, columns=DELIVERY_COLUMNS)
+    from src.export.delivery_exporter import DeliveryExporter
+    exporter = DeliveryExporter()
+    
+    df_full = exporter.get_full_dataframe(records)
+    df_compact = exporter.get_compact_dataframe(records)
 
-    st.markdown(f"**Export Ready**: `{len(df_all_export):,}` rows x `252` delivery columns.")
+    st.markdown(f"""
+    <div style="background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 18px 24px; margin-bottom: 20px;">
+        <div style="font-size: 1.1rem; font-weight: 700; color: #f8fafc; margin-bottom: 8px;">📊 Dataset Export Summary</div>
+        <div style="color: #cbd5e1;">
+            • <b>Total Catalog Items</b>: <code>{len(records):,}</code> rows<br/>
+            • <b>✨ Compact Polished Feed</b>: <code>{len(df_compact.columns)}</code> populated columns (100% empty columns trimmed for easy viewing)<br/>
+            • <b>🏛️ Full Master Schema</b>: <code>252</code> standard columns (includes sparse matrix for up to 50 dynamic attribute triples)
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     exp_col1, exp_col2 = st.columns(2)
     with exp_col1:
-        csv_data = df_all_export.to_csv(index=False).encode('utf-8')
+        st.markdown("#### ✨ Compact & Polished CSV (Clean View)")
+        st.caption(f"Trimmed {252 - len(df_compact.columns)} completely blank columns. Clean, readable in Excel without wide horizontal whitespace.")
+        csv_compact = df_compact.to_csv(index=False).encode('utf-8')
         st.download_button(
-            "📥 Download Complete 252-Column Master CSV",
-            data=csv_data,
-            file_name="Unihack_Enriched_Master_Delivery.csv",
+            "📥 Download Polished Compact CSV",
+            data=csv_compact,
+            file_name="Unihack_Enriched_Compact_Polished.csv",
             mime="text/csv",
             type="primary",
             use_container_width=True
         )
 
     with exp_col2:
-        st.caption("Matches exact schema layout: System Identifiers, Brands, Taxonomy, 5-Channel Copy, 50 Attribute Triples (150 cols), Dimensions, and Digital Assets.")
+        st.markdown("#### 🏛️ Full 252-Column Unilog Master CSV")
+        st.caption("Official hackathon submission standard matching exact 252-column template with all dynamic attribute triple slots.")
+        csv_full = df_full.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            "📥 Download Full 252-Column Master CSV",
+            data=csv_full,
+            file_name="Unihack_Enriched_Master_252Col.csv",
+            mime="text/csv",
+            use_container_width=True
+        )
 
     st.markdown("---")
-    st.dataframe(df_all_export.head(10), use_container_width=True, height=300)
+    st.markdown("#### 👁️ Preview: Polished Compact Feed")
+    st.dataframe(df_compact.head(10), use_container_width=True, height=280)
 
 
 # ── Footer ────────────────────────────────────────────────────────────────────

@@ -34,79 +34,79 @@ class AttributeExtractor:
                 attributes.append(ExtractedAttribute(
                     attribute_label=label,
                     normalized_label=label,
-                    raw_value=str(raw_val),
-                    normalized_value=str(norm_val),
+                    raw_value=str(raw_val).strip(),
+                    normalized_value=str(norm_val).strip(),
                     uom=standardize_uom(uom) if uom else None,
                     is_filterable=True,
-                    confidence=0.95,
+                    confidence=0.96,
                     provenance=ProvenanceRecord(
                         sourcing_tier=tier,
-                        confidence_score=0.95,
-                        snippet=f"{label}: {norm_val} {uom or ''}".strip()
+                        confidence_score=0.96,
+                        snippet=f"{label}: {norm_val}".strip()
                     )
                 ))
 
         text = f"{part_desc} {mfg_part_num}".strip()
 
-        # 1. Grit / Abrasive Grade (e.g. P150, P120, P80, 220 Grit)
+        # 1. Grit / Abrasive Grade (e.g. P150, P120, P80, 220 Grit, 320 Grit)
         grit_match = re.search(r'\b(P\d{2,4}|\d{2,4}\s*Grit)\b', text, re.IGNORECASE)
         if grit_match:
             val = grit_match.group(1).upper()
             add_attr("Grit", val, val)
 
-        # 2. Pack / Package Quantity (e.g. 6pc, 50 Disc/Box, 10pc, 4pk, 2pk, 4M)
+        # 2. Package Quantity (e.g. 6pc, 50 Disc/Box, 10pc, 4pk, 2pk, 4M)
         pack_match = re.search(r'\b(\d+)\s*(pc|pk|pack|Disc/Box|Sheets/Box|CT|box)\b', text, re.IGNORECASE)
         if pack_match:
             qty = pack_match.group(1)
             uom_str = pack_match.group(2)
             add_attr("Package Quantity", qty, qty, uom_str)
 
-        # 3. Voltage Rating (e.g. 120V, 20V, 18V, 60V, 125V, 230V, 115V, 40V)
+        # 3. Voltage Rating (e.g. 120V, 20V, 18V, 60V, 125V, 230V, 115V)
         volt_match = re.search(r'\b(\d{1,3})\s*(V|Volt|Volts|VAC|VDC)\b', text, re.IGNORECASE)
         if volt_match:
             v_val = volt_match.group(1)
-            add_attr("Voltage", v_val, f"{v_val} V", "V")
+            add_attr("Voltage", v_val, v_val, "V")
 
         # 4. Amperage Rating (e.g. 15A, 200A, 225A, 100A, 4 Amp)
         amp_match = re.search(r'\b(\d{1,3})\s*(A|Amp|Amps|Amperes)\b', text, re.IGNORECASE)
-        if amp_match and not volt_match:  # avoid false positives
+        if amp_match and not volt_match:
             a_val = amp_match.group(1)
-            add_attr("Amperage", a_val, f"{a_val} A", "A")
+            add_attr("Amperage", a_val, a_val, "A")
 
         # 5. Horsepower (e.g. 1.75HP, 2HP, 3HP, 5HP)
         hp_match = re.search(r'\b(\d+(?:\.\d+)?)\s*HP\b', text, re.IGNORECASE)
         if hp_match:
             hp_val = hp_match.group(1)
-            add_attr("Horsepower", hp_val, f"{hp_val} HP", "HP")
+            add_attr("Horsepower", hp_val, hp_val, "HP")
 
         # 6. Flow Rate (e.g. 1.5 gpm, 1.8GPM, 2.2 gpm)
         flow_match = re.search(r'\b(\d+(?:\.\d+)?)\s*(GPM|gpm|gal/min)\b', text, re.IGNORECASE)
         if flow_match:
             f_val = flow_match.group(1)
-            add_attr("Flow Rate", f_val, f"{f_val} gpm", "gpm")
+            add_attr("Flow Rate", f_val, f_val, "gpm")
 
         # 7. Pressure Rating (e.g. 150#, 150 psi, 300 psi)
         psi_match = re.search(r'\b(\d+)\s*(#|psi|PSI|lb|lbs)\b', text, re.IGNORECASE)
         if psi_match:
             p_val = psi_match.group(1)
-            add_attr("Pressure Rating", p_val, f"{p_val} psi", "psi")
+            add_attr("Pressure Rating", p_val, p_val, "psi")
 
         # 8. Sound Level (e.g. 47 dBA, 44 dBA, 50 dB)
         sound_match = re.search(r'\b(\d{2})\s*(dBA|dba|db|DB)\b', text, re.IGNORECASE)
         if sound_match:
             s_val = sound_match.group(1)
-            add_attr("Sound Level", s_val, f"{s_val} dBA", "dBA")
+            add_attr("Sound Level", s_val, s_val, "dBA")
 
         # 9. Multi-Dimensions (e.g. 1/2"x18", 5"x.045"x7/8", 6'x36", 1x6-16', 2.75x30, 24x48, 4x4-108)
         dim_3d = re.search(r'(\d+(?:[/-]\d+)?(?:(?:\.\d+)?))\s*["\']?\s*x\s*(\.?\d+(?:[/-]\d+)?)\s*["\']?\s*x\s*(\d+(?:[/-]\d+)?)["\']?', text)
         if dim_3d:
             d1, d2, d3 = dim_3d.group(1), dim_3d.group(2), dim_3d.group(3)
-            add_attr("Dimensions", f"{d1} x {d2} x {d3}", f"{d1} in x {d2} in x {d3} in", "in")
+            add_attr("Dimensions", f"{d1} x {d2} x {d3}", f"{d1} in x {d2} in x {d3} in", None)
         else:
             dim_2d = re.search(r'(\d+(?:[/-]\d+)?(?:\.\d+)?)\s*["\']?\s*x\s*(\d+(?:[/-]\d+)?(?:\.\d+)?)\s*["\']?', text)
             if dim_2d:
                 d1, d2 = dim_2d.group(1), dim_2d.group(2)
-                add_attr("Dimensions", f"{d1} x {d2}", f"{d1} in x {d2} in", "in")
+                add_attr("Dimensions", f"{d1} x {d2}", f"{d1} in x {d2} in", None)
 
         # Single Diameter / Length (e.g. 12" Blade, 7" Disc, 16' Decking, 500')
         inch_single = re.search(r'\b(\d+(?:-\d+/\d+|\.\d+)?)\s*(?:""|"|inch|inches)\b', text, re.IGNORECASE)
@@ -116,12 +116,12 @@ class AttributeExtractor:
                 frac_len = convert_dimension(float(raw_len), "in")
             except Exception:
                 frac_len = f"{raw_len} in"
-            add_attr("Diameter / Length", raw_len, frac_len, "in")
+            add_attr("Diameter / Length", raw_len, frac_len, None)
 
         foot_single = re.search(r"\b(\d+)\s*(?:'|ft|feet)\b", text, re.IGNORECASE)
-        if foot_single and "Length (Feet)" not in seen_labels:
+        if foot_single and "Length" not in seen_labels:
             f_len = foot_single.group(1)
-            add_attr("Length (Feet)", f_len, f"{f_len} ft", "ft")
+            add_attr("Length", f_len, f_len, "ft")
 
         # 10. Color / Finish (e.g. SS, Stainless Steel, Black, White, Chrome, Brushed Nickel, Charcoal, Coastline)
         if re.search(r'\b(SS|Stainless Steel|SST)\b', text, re.IGNORECASE):
@@ -172,8 +172,6 @@ if __name__ == "__main__":
         ("PDSH4816AF Dishwasher SS - Display Only 120V 15A 47 dBA", "PDSH4816AF"),
         ("DCB518ASTS06G Diablo 1/2\"x18\" - Sanding Belt 6pc P150", "DCB518ASTS06G"),
         ("49-94-0013 Milw 5\"x.045\"x7/8\" Metal Cut Off Disc 10pc", "49-94-0013"),
-        ("3/8 CPLG BRS 150# Parker Coupling", "3/8 CPLG BRS 150#"),
-        ("543140016 1nx6-16' Biscayne Sq Edge - Trex Transcend Lineage Decking", "543140016"),
     ]
     for desc, mpn in test_cases:
         print(f"\nProduct: {desc}")
