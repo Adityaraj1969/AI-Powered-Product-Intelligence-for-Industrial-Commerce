@@ -1,11 +1,12 @@
 # ⚡ PartForge — AI-Powered Product Intelligence for Industrial Commerce
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-ai--powered--ecommerce.streamlit.app-FF4B4B.svg?logo=streamlit&logoColor=white)](https://ai-powered-ecommerce.streamlit.app/)
-[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Architecture: Neuro--Symbolic](https://img.shields.io/badge/Architecture-Neuro--Symbolic%20Hybrid-6366f1.svg)]()
-[![Hackathon: UniHack 2026](https://img.shields.io/badge/Hackathon-UniHack%202026-orange.svg)](https://hack2skill.com/event/unilog2026)
-[![Schema: 252--Column](https://img.shields.io/badge/Schema-252--Column%20Standard-emerald.svg)]()
+[![Streamlit App](https://img.shields.io/badge/Live%20Platform-Streamlit%20Cloud-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://ai-powered-ecommerce.streamlit.app/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Adityaraj1969/AI-Powered-Product-Intelligence-for-Industrial-Commerce)
+[![License: MIT](https://img.shields.io/badge/License-MIT-F59E0B?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](https://github.com/Adityaraj1969/AI-Powered-Product-Intelligence-for-Industrial-Commerce/blob/main/LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![Hackathon: UniHack 2026](https://img.shields.io/badge/Event-UniHack%202026-EA580C?style=for-the-badge)](https://hack2skill.com/event/unilog2026)
+[![Architecture: Neuro-Symbolic](https://img.shields.io/badge/Architecture-Neuro--Symbolic-6366F1?style=for-the-badge)](https://github.com/Adityaraj1969/AI-Powered-Product-Intelligence-for-Industrial-Commerce/blob/main/docs/Architecture.md)
+[![Schema: 252-Column Standard](https://img.shields.io/badge/Schema-252--Column%20Standard-10B981?style=for-the-badge)](https://github.com/Adityaraj1969/AI-Powered-Product-Intelligence-for-Industrial-Commerce/blob/main/docs/Design.md)
 
 > 🌐 **Live Web Platform**: **[https://ai-powered-ecommerce.streamlit.app/](https://ai-powered-ecommerce.streamlit.app/)**  
 > **"PartForge transforms fragmented, cryptic supplier catalog feeds into fully-classified, controlled-vocabulary, 252-column golden records with 100% rule compliance — powered by a high-throughput Neuro-Symbolic Architecture combining deterministic local symbolic engines with multi-agent semantic LLM reasoning."**
