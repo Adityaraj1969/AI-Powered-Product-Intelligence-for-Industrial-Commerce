@@ -6,13 +6,13 @@
 
 ---
 
-## 1. 36–48 Hour Hackathon Sprint Execution Timeline
+## 1. Hackathon Sprint Execution Timeline
 
 To secure a **Top-5 placement at UniHack**, execution must balance rapid prototyping, architectural rigor, and verifiable evaluation against the 200 ground truth items.
 
 ```mermaid
 gantt
-    title PartForge 36-48 Hour Sprint Timeline
+    title PartForge Sprint Timeline
     dateFormat HH:mm
     axisFormat %H:%M
 
@@ -49,14 +49,14 @@ gantt
 
 ```mermaid
 graph TD
-    P0["Phase 0: Ground Truth & Setup (Hrs 0-5)"] --> P1["Phase 1: Symbolic Engine (Hrs 5-13)"]
-    P1 --> P2["Phase 2: Neuro-Symbolic Core & Verticals (Hrs 13-26)"]
-    P2 --> P3["Phase 3: Synthesis & 252-Col Export (Hrs 26-33)"]
-    P3 --> P4["Phase 4: HITL UI & Evaluation Harness (Hrs 33-40)"]
-    P4 --> P5["Phase 5: Scale Run & Winning Pitch (Hrs 40-48)"]
+    P0["Phase 0: Ground Truth & Setup"] --> P1["Phase 1: Symbolic Engine"]
+    P1 --> P2["Phase 2: Neuro-Symbolic Core & Verticals"]
+    P2 --> P3["Phase 3: Synthesis & 252-Col Export"]
+    P3 --> P4["Phase 4: HITL UI & Evaluation Harness"]
+    P4 --> P5["Phase 5: Scale Run & Winning Pitch"]
 ```
 
-### Phase 0: Setup, Parsing & Ground Truth Baseline (Hours 0–5)
+### Phase 0: Setup, Parsing & Ground Truth Baseline
 * **Objective**: Build resilient parsers for all 7 reference datasets and establish a baseline benchmark harness.
 * **Key Tasks**:
   1. Parse `Reference_Documents_Summary.xlsx`, `Unilog-Sample_200_Items-Input-vs-Output.xlsx`, `Decimal_Fraction.xlsx`, and `Unilog_Master_UOM_Standards_Abbreviations_and_Terms.xlsx`.
@@ -64,7 +64,7 @@ graph TD
   3. Create baseline test suite measuring raw input vs ground truth delivery columns.
 * **Milestone**: Parser successfully loads 100% of reference sheets with zero silent data loss.
 
-### Phase 1: Symbolic Knowledge Base & Deterministic Rules (Hours 5–13)
+### Phase 1: Symbolic Knowledge Base & Deterministic Rules
 * **Objective**: Construct high-speed in-memory indexes for all controlled vocabularies.
 * **Key Tasks**:
   1. **UniCat Brand Engine**: Index 27,000+ brand/mfg rows into SymSpell/Trie with legal casing and `®`/`™` retention.
@@ -73,7 +73,7 @@ graph TD
   4. **Fractional Lookup**: Implement 63-entry 64th decimal-to-fraction converter (`0.25` $\rightarrow$ `1/4 in`, `50.25` $\rightarrow$ `50-1/4 in`).
 * **Milestone**: Sub-millisecond deterministic lookups ($<0.5\text{ ms}$) across all master tables.
 
-### Phase 2: Neuro-Symbolic AI Core & Deep Verticals (Hours 13–26)
+### Phase 2: Neuro-Symbolic AI Core & Deep Verticals
 * **Objective**: Implement the multi-agent AI pipeline with deep specialization on Faucets and Fittings.
 * **Key Tasks**:
   1. **Taxonomy Classifier**: Hierarchical classification into `Dept > Class > Fine > Leaf` + 8-digit UNSPSC.
@@ -82,7 +82,7 @@ graph TD
   4. **OEM Sourcing RAG Agent**: Grounded extraction against manufacturer technical cut-sheets with provenance tracking.
 * **Milestone**: 0% hallucinated attributes; 100% of extracted values conform to LOV constraints.
 
-### Phase 3: Multi-Channel Description Synthesis & 252-Col Export (Hours 26–33)
+### Phase 3: Multi-Channel Description Synthesis & 252-Col Export
 * **Objective**: Generate all 5 required customer-facing content formats and assemble the 252-column master schema.
 * **Key Tasks**:
   1. **Invoice Builder**: Strictly $\le 40$ chars, ALL CAPS, high-density POS format.
@@ -92,7 +92,7 @@ graph TD
   5. **252-Column Excel Exporter**: Replicate the exact sheet structure of the 200 delivery format file.
 * **Milestone**: End-to-end batch enrichment pipeline exporting production-ready spreadsheets.
 
-### Phase 4: HITL Triage Dashboard & Evaluation Benchmark (Hours 33–40)
+### Phase 4: HITL Triage Dashboard & Evaluation Benchmark
 * **Objective**: Deploy the interactive web interface and run comprehensive evaluation scoring.
 * **Key Tasks**:
   1. Build Streamlit HITL Dashboard with:
@@ -103,7 +103,7 @@ graph TD
   2. Execute the evaluation benchmark against all 200 ground truth items.
 * **Milestone**: Working UI and verified evaluation scorecard demonstrating $>96\%$ accuracy.
 
-### Phase 5: Scale Run on 1,000 Items, Pitch & Demo Polish (Hours 40–48)
+### Phase 5: Scale Run on 1,000 Items, Pitch & Demo Polish
 * **Objective**: Ingest `Sample-1000_Items.xlsx`, record high-impact demo walkthrough, and finalize presentation.
 * **Key Tasks**:
   1. Run async batch pipeline on all 1,000 raw catalog items; generate final delivery spreadsheet.
