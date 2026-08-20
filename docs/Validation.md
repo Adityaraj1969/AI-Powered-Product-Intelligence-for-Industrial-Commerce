@@ -45,18 +45,23 @@ flowchart LR
 
 ### 2.1 Tier 1: Syntax, Character Limits & Placeholder Validation
 * **Rule 1.1 (Placeholder Leaks)**: Reject any field containing `-- Unbranded --`, `-- No Unilog Brand --`, `None`, `N/A`, `Generic`.
-* **Rule 1.2 (Invoice Character Ceiling)**: Assert $\text{len}(\text{Invoice\_Desc}) \le 40$.
-* **Rule 1.3 (Mobile Character Window)**: Assert $60 \le \text{len}(\text{Mobile\_Desc}) \le 80$.
-* **Rule 1.4 (Title Length Ceiling)**: Assert $\text{len}(\text{Product\_Title}) \le 150$.
-* **Rule 1.5 (UNSPSC Format)**: Assert $\text{UNSPSC} \in \mathbb{N}^8$ (exactly 8 numeric digits).
+  ```
+  Assert: Invoice_Desc does NOT contain any placeholder string
+  ```
+* **Rule 1.2 (Invoice Character Ceiling)**: Assert `len(Invoice_Desc) ≤ 40`.
+* **Rule 1.3 (Mobile Character Window)**: Assert `60 ≤ len(Mobile_Desc) ≤ 80`.
+* **Rule 1.4 (Title Length Ceiling)**: Assert `len(Product_Title) ≤ 150`.
+* **Rule 1.5 (UNSPSC Format)**: Assert UNSPSC is exactly 8 numeric digits.
 
 ### 2.2 Tier 2: Master Data & Controlled LOV Membership
-* **Rule 2.1 (Brand Validation)**: Assert `BRAND_NAME` $\in \text{UniCat\_Manufacturer\_and\_Brand\_List}$.
-* **Rule 2.2 (Manufacturer Validation)**: Assert `MANUFACTURER_NAME` $\in \text{UniCat\_Manufacturer\_and\_Brand\_List}$.
+* **Rule 2.1 (Brand Validation)**: Assert `BRAND_NAME ∈ UniCat_Manufacturer_and_Brand_List`.
+* **Rule 2.2 (Manufacturer Validation)**: Assert `MANUFACTURER_NAME ∈ UniCat_Manufacturer_and_Brand_List`.
 * **Rule 2.3 (Discrete Attribute LOV Compliance)**: For all categorical attributes, assert:
-  $$\text{Attribute\_Value} \in \text{LOV\_Allowed\_Values}(\text{Classpath}, \text{Attribute\_Label})$$
-* **Rule 2.4 (Fitting Connection Type)**: Assert connection string $\in 515$ canonical connection types (`Fittings_LOV.xlsx`).
-* **Rule 2.5 (Fitting Material)**: Assert material string $\in 113$ canonical material types (`Fittings_LOV.xlsx`).
+  ```
+  Attribute_Value ∈ LOV_Allowed_Values(Classpath, Attribute_Label)
+  ```
+* **Rule 2.4 (Fitting Connection Type)**: Assert connection string ∈ 515 canonical connection types (`Fittings_LOV.xlsx`).
+* **Rule 2.5 (Fitting Material)**: Assert material string ∈ 113 canonical material types (`Fittings_LOV.xlsx`).
 
 ### 2.3 Tier 3: UOM Standards & Fractional Math Verification
 * **Rule 3.1 (Approved UOM Abbreviation)**: All extracted physical quantities must end with an approved UOM abbreviation from `Unilog_Master_UOM_Standards_Abbreviations_and_Terms.xlsx` (e.g. `in`, `ft`, `gpm`, `psi`, `V`, `A`, `dBA`).
@@ -64,7 +69,7 @@ flowchart LR
 * **Rule 3.3 (Exact Fractional Conversion)**: All inch measurements with decimals must resolve to the 64th fractional matrix (`Decimal_Fraction.xlsx`). Compound format must be hyphenated: `50-1/4 in`.
 
 ### 2.4 Tier 4: Multi-Channel Formula & Casing Lint
-* **Rule 4.1 (Invoice Casing)**: Assert $\text{Invoice\_Desc} == \text{Invoice\_Desc.upper()}$.
+* **Rule 4.1 (Invoice Casing)**: Assert `Invoice_Desc == Invoice_Desc.upper()`.
 * **Rule 4.2 (Trademark Symbol Placement)**: Assert registered marks (`®`, `™`) are retained in `Product_Title`, `Long_Desc`, and `Brand_Name`, but stripped from `Invoice_Desc`.
 * **Rule 4.3 (Formula Adherence)**: Assert `Product_Title` starts with `Brand` and contains `MPN` and `Item Type`.
 
@@ -89,7 +94,9 @@ Where:
 * $w_3 = 0.40$ (Attribute LOV Conformity & Extraction Quality)
 * $w_4 = 0.20$ (Sourcing Traceability & Evidence Strength)
 
-$$\text{Attribute Score: } C_{\text{attributes}} = \frac{1}{N} \sum_{i=1}^{N} \left[ \mathbb{I}(\text{Value}_i \in \text{LOV}) \cdot 0.6 + \text{LLM\_LogProb}_i \cdot 0.4 \right]$$
+  ```
+  Attribute_Score = (1/N) × Σ [ I(Value_i ∈ LOV) × 0.6 + LLM_LogProb_i × 0.4 ]
+  ```
 
 ```mermaid
 graph LR

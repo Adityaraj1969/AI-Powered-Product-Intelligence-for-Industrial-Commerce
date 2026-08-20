@@ -33,20 +33,20 @@ PartForge delivers **deep vertical specialization** for two end-to-end specified
 ```mermaid
 flowchart LR
     subgraph Raw_Messy_Feeds [Raw Supplier Feeds]
-        R1["Cryptic Text: '3/8 CPLG BRS 150#'"]
-        R2["Placeholder Brands: '-- Unbranded --'"]
-        R3["Mixed Units: 'inches', 'IN.', '24\"'"]
-        R4["Decimal Dims: '50.25 in'"]
+        R1["Cryptic Text: 3/8 CPLG BRS 150#"]
+        R2["Placeholder Brands: -- Unbranded --"]
+        R3["Mixed Units: inches, IN., 24 in"]
+        R4["Decimal Dims: 50.25 in"]
     end
 
     subgraph PartForge_Engine [PartForge Cost-Optimized Engine]
         direction TB
-        E1[Placeholder Cleaner & Tokenizer - Local CPU]
-        E2[Brand & Taxonomy Trie Resolvers - Local CPU]
-        E3[OEM Spec Cut-Sheet RAG - Google AI Studio / Local VLM]
-        E4[Constrained LOV Extractor - Groq Llama 3.3 Free]
-        E5[Multi-Channel Formula Builder - Groq / Ollama Engine]
-        E6[5-Tier Gatekeeper Firewall - Local CPU]
+        E1["Placeholder Cleaner and Tokenizer"]
+        E2["Brand and Taxonomy Trie Resolvers"]
+        E3["OEM Spec Cut-Sheet RAG"]
+        E4["Constrained LOV Extractor - Groq Llama 3.3"]
+        E5["Multi-Channel Formula Builder"]
+        E6["5-Tier Gatekeeper Firewall"]
     end
 
     subgraph Golden_Record_252 [252-Column Master Delivery Format]
@@ -86,19 +86,19 @@ PartForge enforces a **Neuro-Symbolic Architecture**:
 
 ```mermaid
 quadrantChart
-    title Project Priorities: Depth vs Breadth
-    x-axis Low Technical Risk --> High Technical Risk
-    y-axis Operational / Volume --> Architectural / Depth
-    quadrant-1 Deep Category Specialization (Faucets & Fittings)
-    quadrant-2 Scalable Batch Pipeline (1000 Items)
-    quadrant-3 Out of Scope (Autonomous Web Crawling)
-    quadrant-4 Deterministic Rules & Gatekeeper (UOM & Brands)
+    title Project Priorities - Depth vs Breadth
+    x-axis "Low Technical Risk" --> "High Technical Risk"
+    y-axis "Operational / Volume" --> "Architectural / Depth"
+    quadrant-1 Deep Category Specialization
+    quadrant-2 Scalable Batch Pipeline
+    quadrant-3 Out of Scope
+    quadrant-4 Deterministic Rules and Gatekeeper
     "Deep LOV Extraction": [0.85, 0.90]
     "252-Col Delivery Schema": [0.75, 0.85]
     "200 Ground Truth Benchmark": [0.70, 0.80]
     "Batch 1000 Ingestion": [0.35, 0.85]
     "Symbolic Brand Trie": [0.25, 0.35]
-    "UOM & 64th Fractional Engine": [0.20, 0.30]
+    "UOM and Fractional Engine": [0.20, 0.30]
     "HITL Review Workbench": [0.60, 0.50]
     "Unrestricted Web Crawling": [0.90, 0.20]
 ```

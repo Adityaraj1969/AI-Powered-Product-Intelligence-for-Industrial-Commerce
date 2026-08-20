@@ -67,7 +67,7 @@ Based on `Unilog_Master_UOM_Standards_Abbreviations_and_Terms.xlsx` (89 measurem
 ```mermaid
 graph LR
     subgraph Non_Standard_Inputs [Raw Supplier UOMs]
-        U1["24inches, 24 IN., 24inch, 24\""]
+        U1["24inches, 24 IN., 24inch"]
         U2["1.5 Gallons Per Minute, 1.5GPM"]
         U3["150 Pounds, 150#"]
         U4["120 Volts, 120v, 120VAC"]
@@ -146,25 +146,33 @@ graph TD
 ### 6.1 Invoice Description (DESC-01)
 * **Constraints**: Strictly $\le 40$ characters, **ALL UPPERCASE (ALL CAPS)**, minimal punctuation.
 * **Formula**:
-  $$\text{Invoice Desc} = \text{ITEM\_TYPE}_{\text{ABBR}} + \text{ " " } + \text{KEY\_ATTR\_1} + \text{ " " } + \text{DIMENSION} + \text{UOM}$$
-* **Example**: `PDSH4816AF Dishwasher SS` $\rightarrow$ `DISHWASHER LEG 5 SST 120V 15A 50-1/4IN` (38 chars $\le 40$).
+  ```
+  Invoice_Desc = ITEM_TYPE_ABBR + " " + KEY_ATTR_1 + " " + DIMENSION + UOM
+  ```
+* **Example**: `PDSH4816AF Dishwasher SS` → `DISHWASHER LEG 5 SST 120V 15A 50-1/4IN` (38 chars ≤ 40).
 
 ### 6.2 Mobile Description (DESC-02)
-* **Constraints**: Strictly between $60 \text{ and } 80$ characters, Title Case.
+* **Constraints**: Strictly between 60 and 80 characters, Title Case.
 * **Formula**:
-  $$\text{Mobile Desc} = \text{MANUFACTURER\_NAME} + \text{ " " } + \text{BRAND\_NAME} + \text{", "} + \text{ITEM\_TYPE} + \text{", "} + \text{SERIES} + \text{", "} + \text{MPN}$$
-* **Example**: `Rheem Manufacturing FRIGIDAIRE, Dishwasher, Professional Series, PDSH4816AF` (74 chars $\in [60, 80]$).
+  ```
+  Mobile_Desc = MANUFACTURER_NAME + " " + BRAND_NAME + ", " + ITEM_TYPE + ", " + SERIES + ", " + MPN
+  ```
+* **Example**: `Rheem Manufacturing FRIGIDAIRE, Dishwasher, Professional Series, PDSH4816AF` (74 chars ∈ [60, 80]).
 
 ### 6.3 Product Title / Short Description (DESC-03)
 * **Constraints**: Strictly $\le 150$ characters, Title Case, registered trademark symbols (`®`, `™`) preserved.
 * **Formula**:
-  $$\text{Product Title} = \text{BRAND}^{\text{®/™}} + \text{ [SERIES] } + \text{MPN } + \text{ITEM\_TYPE } + \text{"With " [FEATURE™] } + \text{", " [KEY\_ATTRS]}$$
+  ```
+  Product_Title = BRAND®/™ + " " + [SERIES] + " " + MPN + " " + ITEM_TYPE + " With " + [FEATURE™] + ", " + [KEY_ATTRS]
+  ```
 * **Example**: `FRIGIDAIRE® Professional Series PDSH4816AF Dishwasher With CleanBoost™, Leg Mounting, 5-Wash Cycle, Stainless Steel`
 
 ### 6.4 Long Description (DESC-04)
 * **Constraints**: Structured technical narrative detailing Brand, Series, Features, Electrical Specs, Mounting, Dimensions with fractions, Sound Level, and Materials.
 * **Formula**:
-  $$\text{Long Desc} = \text{BRAND}^{\text{®/™}} + \text{ ITEM\_TYPE With } + \text{FEATURE}^{\text{™}} + \text{, SERIES, } + \text{SPEC\_LIST (Cycles, V, A, Mounting, Dims, Open Depth, dBA, Material)}$$
+  ```
+  Long_Desc = BRAND®/™ + " " + ITEM_TYPE + " With " + FEATURE™ + ", " + SERIES + ", " + SPEC_LIST(Cycles, V, A, Mounting, Dims, Depth, dBA, Material)
+  ```
 * **Example**: `FRIGIDAIRE® Dishwasher With CleanBoost™, Professional Series, 5 Wash Cycles, 120 V, 15 A, Leg Mounting, 24 in W x 24-1/4 in D, 50-1/4 in Depth With Door Open, 47 dBA Sound Level, Stainless Steel`
 
 ---
