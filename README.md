@@ -70,6 +70,65 @@ Generic generative models fail in industrial commerce due to strict constraints 
 
 ---
 
+## 🛡️ 5-Tier Quality Gatekeeper Pipeline
+
+Every enriched record must pass through all 5 deterministic validation tiers before export. Failed records are routed to the Human-in-the-Loop triage queue with precise error chips.
+
+```mermaid
+graph TD
+    IN["Candidate Enriched Record"] --> T1["Tier 1: Syntax and Character Limits"]
+    T1 -->|Pass| T2["Tier 2: Controlled LOV and Brand Membership"]
+    T2 -->|Pass| T3["Tier 3: UOM Abbreviation and Fractional Math"]
+    T3 -->|Pass| T4["Tier 4: Formula and Casing Compliance"]
+    T4 -->|Pass| T5["Tier 5: Sourcing Provenance and Anomaly Guard"]
+
+    T5 -->|"All Passed: Score >= 0.95"| GREEN["252-Column Master Export"]
+    T5 -->|"Score 0.80 - 0.95"| AMBER["Amber: Quick Triage"]
+    T5 -->|"Score < 0.80"| RED["Red: Mandatory Review"]
+
+    T1 -.->|Fail| HITL["HITL Triage Queue"]
+    T2 -.->|Fail| HITL
+    T3 -.->|Fail| HITL
+    T4 -.->|Fail| HITL
+```
+
+## 🔧 Auto-Repair Rule Flow
+
+Before routing failures to human review, the Gatekeeper attempts deterministic auto-repair for common violations:
+
+```mermaid
+flowchart LR
+    subgraph Detect ["Error Detection"]
+        E1["Invoice > 40 chars"]
+        E2["Missing UOM space: 24in"]
+        E3["Decimal not fraction: 50.25"]
+        E4["Lowercase invoice"]
+        E5["Out-of-vocab attribute"]
+    end
+
+    subgraph Repair ["Auto-Repair Engine"]
+        R1["Abbreviation Dictionary"]
+        R2["Regex Space Insertion"]
+        R3["64th Fraction Matrix Lookup"]
+        R4["Force .upper transform"]
+        R5["RapidFuzz LOV Match >= 88%"]
+    end
+
+    subgraph Result ["Outcome"]
+        OK["Repaired: Re-validate"]
+        HITL["Flag for Human Review"]
+    end
+
+    E1 --> R1 --> OK
+    E2 --> R2 --> OK
+    E3 --> R3 --> OK
+    E4 --> R4 --> OK
+    E5 --> R5 -->|"Match >= 88%"| OK
+    R5 -->|"Match < 88%"| HITL
+```
+
+---
+
 ## ⚡ Dual-Mode Delivery Export Format
 
 To provide both complete schema compliance and seamless Excel readability, PartForge offers two dedicated export modes:
