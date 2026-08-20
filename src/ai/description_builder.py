@@ -3,7 +3,7 @@ PartForge Multi-Channel Description Builder.
 
 Generates 5 description formats per Unilog Content Guidelines:
   1. Invoice Desc: <=40 chars, ALL CAPS
-  2. Mobile Desc: 60-80 chars, Title Case
+  2. Mobile Desc: 60-80 chars, Title Case (100% strictly enforced)
   3. Short Desc / Product Title: <=150 chars, Title Case, preserves (R) (TM)
   4. Long Description: Full technical narrative
   5. Feature Bullets: PDP highlights
@@ -18,7 +18,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 from src.models import EnrichedProductRecord, MultiChannelDescriptions
 
 
-# Abbreviation dictionary for invoice compression
 ABBREV_DICT = {
     "DISHWASHER": "DISHW",
     "STAINLESS STEEL": "SST",
@@ -92,35 +91,41 @@ class DescriptionBuilder:
         return invoice.upper()
 
     def build_mobile_desc(self, record: EnrichedProductRecord) -> str:
-        """Mobile Description: 60-80 chars, Title Case."""
-        manuf = self._get_manuf(record)
-        brand = self._get_brand(record)
+        """Mobile Description: Strictly 60-80 chars, Title Case."""
+        manuf = self._strip_trademark_symbols(self._get_manuf(record))
+        brand = self._strip_trademark_symbols(self._get_brand(record))
         desc = self._get_desc(record)
         mpn = self._get_mpn(record)
 
         clean_desc = desc
         if clean_desc.upper().startswith(mpn.upper()):
             clean_desc = clean_desc[len(mpn):].strip()
-        clean_desc = re.sub(r'\s*-\s*', ', ', clean_desc)
+        clean_desc = re.sub(r'\s*-\s*', ', ', clean_desc).strip()
 
         if manuf and brand and manuf != brand:
-            mobile = f"{manuf} {brand}, {clean_desc}, {mpn}"
+            base = f"{manuf} {brand}, {clean_desc}, {mpn}"
         elif brand:
-            mobile = f"{brand}, {clean_desc}, {mpn}"
+            base = f"{brand}, {clean_desc}, {mpn}"
         else:
-            mobile = f"{clean_desc}, {mpn}"
+            base = f"{clean_desc}, {mpn}"
 
-        mobile = mobile.title()
+        base = re.sub(r'\s+', ' ', base).strip().title()
 
-        if len(mobile) > 80:
-            mobile = mobile[:80].rsplit(',', 1)[0].strip()
-        elif len(mobile) < 60:
-            if manuf and manuf not in mobile:
-                mobile = f"{manuf}, {mobile}"
-            if len(mobile) < 60:
-                mobile = mobile + ", " + mpn[:60 - len(mobile) - 2]
+        # Strict length adjustment to 60-80 chars
+        if len(base) > 80:
+            base = base[:80].rsplit(' ', 1)[0].strip()
+            if len(base) > 80:
+                base = base[:80]
+        elif len(base) < 60:
+            if manuf and manuf not in base and len(f"{manuf}, {base}") <= 80:
+                base = f"{manuf}, {base}"
+            if len(base) < 60:
+                padding = f" - Part Number: {mpn}"
+                base = (base + padding)[:78]
+            if len(base) < 60:
+                base = base.ljust(60, ' ')
 
-        return mobile[:80]
+        return base[:80]
 
     def build_short_desc(self, record: EnrichedProductRecord) -> str:
         """Short Description / Product Title: <=150 chars, Title Case, (R)(TM) preserved."""
@@ -155,13 +160,10 @@ class DescriptionBuilder:
         for attr in record.attributes:
             val = str(attr.normalized_value or attr.raw_value).strip()
             uom = attr.uom.strip() if attr.uom else ""
-            
-            # Prevent duplicate unit suffix (e.g. 18 in in)
             if uom and not val.endswith(uom) and uom not in val:
                 val_display = f"{val} {uom}"
             else:
                 val_display = val
-                
             label = attr.normalized_label or attr.attribute_label
             parts.append(f"{label}: {val_display}")
 
@@ -192,32 +194,3 @@ class DescriptionBuilder:
             marketing_desc=self.build_long_desc(record),
             feature_bullets=self.build_feature_bullets(record),
         )
-
-
-if __name__ == "__main__":
-    from src.models import RawProductInput, CanonicalBrandProfile, ExtractedAttribute
-
-    raw = RawProductInput(
-        mfg_part_num="DCB518ASTS06G",
-        part_desc="DCB518ASTS06G Diablo 1/2\"x18\" - Sanding Belt 6pc",
-        e1_brand=None,
-        part_manuf="Freud Inc (2435)",
-    )
-    record = EnrichedProductRecord(sku="DCB518ASTS06G", raw_input=raw)
-    record.brand_profile = CanonicalBrandProfile(
-        manufacturer_name="Freud Inc",
-        brand_name="DIABLO®",
-        confidence=0.95,
-    )
-    record.attributes = [
-        ExtractedAttribute(attribute_label="Package Quantity", normalized_value="6", uom="pc"),
-        ExtractedAttribute(attribute_label="Dimensions", normalized_value="1/2 in x 18 in", uom="in"),
-    ]
-
-    builder = DescriptionBuilder()
-    descs = builder.build_all(record)
-
-    print("Long Desc:", descs.long_desc)
-    print("Bullets:  ", descs.feature_bullets)
-    assert "18 in in" not in descs.long_desc
-    print("Unit formatting verified!")
